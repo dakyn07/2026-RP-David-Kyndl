@@ -2,44 +2,215 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <title>{{ team.name }} | LiveScore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ team.name }} | DakynScore</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <style>
-        body { background-color: #121212; color: #e0e0e0; }
-        .ls-green { color: #00ff00; font-weight: bold; }
-        .section-title { border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 30px; color: #00ff00; }
-        .player-row { background-color: #1e1e1e; padding: 8px; margin-bottom: 4px; border-radius: 5px; }
+        :root {
+            --bg-dark: #0b0e11;      
+            --card-bg: #151921;      
+            --table-grey: #242933;   
+            --accent: #00ff41;       
+            --text-main: #ffffff;
+            --text-dim: #a0a6ac;
+        }
+
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+        }
+
+        .navbar {
+            background: rgba(21, 25, 33, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.2rem 0;
+        }
+
+        .ls-green { color: var(--accent); font-weight: 800; }
+
+        .section-title {
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.1rem;
+            color: var(--text-dim);
+            font-weight: 800;
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+
+        .card-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            margin-bottom: 30px;
+        }
+
+        .player-row {
+            background-color: var(--table-grey);
+            padding: 16px 20px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s, background-color 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .player-row:hover {
+            background-color: #2d3440;
+            transform: scale(1.005);
+        }
+
+        .player-number {
+            color: var(--text-dim);
+            margin-right: 12px;
+            font-weight: 600;
+        }
+
+        .player-name {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .position-badge {
+            background: rgba(0, 255, 65, 0.1);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            font-size: 0.85rem;
+        }
+
+        .match-row {
+            background-color: var(--table-grey);
+            padding: 16px 20px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            transition: transform 0.2s, background-color 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .match-row:hover {
+            background-color: #2d3440;
+            transform: scale(1.005);
+        }
+
+        .match-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .team-name-match {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .match-score {
+            background: #000;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 800;
+            color: var(--accent);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover { 
+            background: var(--accent); 
+            color: black; 
+            font-weight: bold;
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .team-logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
-    <div class="container py-5">
-        <div class="text-center mb-5">
-            <h1 class="display-4 fw-bold">{{ team.name }}</h1>
-            <a href="/" class="btn btn-sm btn-outline-success">Zpět na tabulku</a>
+
+    <nav class="navbar navbar-dark mb-5">
+        <div class="container text-center">
+            <a class="navbar-brand m-0" href="/">
+                <span class="ls-green">Dakyn</span>Score
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-5">
+            <div class="team-header flex-grow-1">
+                {% if team.logo_url %}
+                    <img src="{{ team.logo_url }}" alt="{{ team.name }}" class="team-logo">
+                {% endif %}
+                <h1 class="fw-extrabold m-0" style="font-weight: 800; font-size: 2.5rem;">{{ team.name }}</h1>
+            </div>
+            <a href="/" class="btn-back">Zpět domů</a>
         </div>
 
         <div class="row">
-            <div class="col-md-6">
-                <h3 class="section-title">Soupiska</h3>
-                {% for p in players %}
-                <div class="player-row d-flex justify-content-between">
-                    <span><span class="text-muted me-2">{{ p.number }}</span> <strong>{{ p.name }}</strong></span>
-                    <span class="badge bg-dark">{{ p.get_position_display }}</span>
+            <div class="col-lg-6">
+                <div class="card-container">
+                    <h4 class="section-title">Soupiska</h4>
+                    {% for p in players %}
+                    <div class="player-row">
+                        <div>
+                            <span class="player-number">{{ p.number }}</span>
+                            <span class="player-name">{{ p.name }}</span>
+                        </div>
+                        <span class="position-badge">{{ p.get_position_display }}</span>
+                    </div>
+                    {% empty %}
+                    <p class="text-muted">Nenalezeni žádní hráči.</p>
+                    {% endfor %}
                 </div>
-                {% empty %}
-                <p>Nenalezeni žádní hráči.</p>
-                {% endfor %}
             </div>
             
-            <div class="col-md-6">
-                <h3 class="section-title">Zápasy</h3>
-                {% for m in past_matches %}
-                <div class="player-row text-center">
-                    {{ m.home_team.name }} <strong>{{ m.home_score }}:{{ m.away_score }}</strong> {{ m.away_team.name }}
+            <div class="col-lg-6">
+                <div class="card-container">
+                    <h4 class="section-title">Poslední zápasy</h4>
+                    {% for m in past_matches %}
+                    <div class="match-row">
+                        <div class="match-teams">
+                            <span class="team-name-match">{{ m.home_team.name }}</span>
+                            <span class="match-score">{{ m.home_score }}:{{ m.away_score }}</span>
+                            <span class="team-name-match">{{ m.away_team.name }}</span>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="text-muted">Zatím nejsou žádné zápasy.</p>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
         </div>
     </div>
+
 </body>
 </html>
