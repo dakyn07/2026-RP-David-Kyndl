@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ league_name }} | Tabulka</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0b0e11;      
+            --card-bg: #151921;      
+            --table-grey: #242933;   
+            --accent: #00ff41;       
+            --text-main: #ffffff;
+            --text-dim: #a0a6ac;
+        }
+
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+        }
+
+        .navbar {
+            background: rgba(21, 25, 33, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.2rem 0;
+        }
+
+        .ls-green { color: var(--accent); font-weight: 800; }
+
+        .table-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        .modern-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px; 
+        }
+
+        .modern-table thead th {
+            color: var(--text-dim);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1rem;
+            padding: 15px 20px;
+            border: none;
+        }
+
+        .modern-table tbody tr {
+            background-color: var(--table-grey);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .modern-table tbody tr:hover {
+            background-color: #2d3440;
+            transform: scale(1.005);
+        }
+
+        .modern-table td {
+            padding: 18px 20px;
+            border: none;
+            color: var(--text-main);
+        }
+
+        .modern-table td:first-child { border-radius: 12px 0 0 12px; }
+        .modern-table td:last-child { border-radius: 0 12px 12px 0; }
+
+        .rank-number { font-weight: 800; color: var(--accent); font-size: 1.1rem; }
+        
+        .team-link { 
+            color: var(--text-main); 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 1.05rem;
+        }
+
+        .stats-cell {
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .points-pill {
+            background: rgba(0, 255, 65, 0.1);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .btn-back:hover { 
+            background: var(--accent); 
+            color: black; 
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-dark mb-5">
+        <div class="container text-center">
+            <a class="navbar-brand m-0" href="/">
+                <span class="ls-green">Dakyn</span>Score
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <div>
+                <h4 class="mb-1 small text-uppercase" style="letter-spacing: 2px;">Ligová tabulka</h4>
+                <h1 class="fw-extrabold m-0" style="font-weight: 800; font-size: 2.5rem;">{{ league_name }}</h1>
+            </div>
+            <a href="/" class="btn-back">Zpět domů</a>
+        </div>
+
+        <div class="table-container">
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">Pořadí</th>
+                        <th>Tým</th>
+                        <th class="text-center">Zápasy</th>
+                        <th class="text-center">Skóre</th>
+                        <th class="text-center">Body</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in table %}
+                    <tr>
+                        <td class="rank-number text-center">{{ forloop.counter }}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                {% if row.team.logo_url %}
+                                    <img src="{{ row.team.logo_url }}" width="35" height="35" class="me-3" style="object-fit: contain;">
+                                {% else %}
+                                    <div class="me-3 bg-dark rounded-circle" style="width: 35px; height: 35px;"></div>
+                                {% endif %}
+                                <a href="{% url 'team_detail' row.team.id %}" class="team-link">{{ row.team.name }}</a>
+                            </div>
+                        </td>
+                        <td class="stats-cell">{{ row.played }}</td>
+                        <td class="stats-cell">{{ row.goals_for }}:{{ row.goals_against }}</td>
+                        <td class="stats-cell">
+                            <span class="points-pill">{{ row.points }} B</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

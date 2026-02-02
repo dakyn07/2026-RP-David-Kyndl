@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ team.name }} | LiveScore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #121212; color: #e0e0e0; }
+        .ls-green { color: #00ff00; font-weight: bold; }
+        .section-title { border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 30px; color: #00ff00; }
+        .player-row { background-color: #1e1e1e; padding: 8px; margin-bottom: 4px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold">{{ team.name }}</h1>
+            <a href="/" class="btn btn-sm btn-outline-success">Zpět na tabulku</a>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="section-title">Soupiska</h3>
+                {% for p in players %}
+                <div class="player-row d-flex justify-content-between">
+                    <span><span class="text-muted me-2">{{ p.number }}</span> <strong>{{ p.name }}</strong></span>
+                    <span class="badge bg-dark">{{ p.get_position_display }}</span>
+                </div>
+                {% empty %}
+                <p>Nenalezeni žádní hráči.</p>
+                {% endfor %}
+            </div>
+            
+            <div class="col-md-6">
+                <h3 class="section-title">Zápasy</h3>
+                {% for m in past_matches %}
+                <div class="player-row text-center">
+                    {{ m.home_team.name }} <strong>{{ m.home_score }}:{{ m.away_score }}</strong> {{ m.away_team.name }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
