@@ -3,15 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiveScore | David Kyndl</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>RP David Kyndl</title>
+    
+    <style>
+        body { 
+            background-color: #121212; 
+            color: #e0e0e0; 
+            font-family: 'Segoe UI', sans-serif; 
+        }
+        .navbar {
+            background-color: #1a1a1a;
+            border-bottom: 2px solid #00ff00;
+        }
+        .ls-green { color: #00ff00; font-weight: bold; }
+        .card-match { 
+            background-color: #1e1e1e; 
+            border: none;
+            border-left: 4px solid #00ff00; 
+            margin-bottom: 12px;
+            border-radius: 8px;
+        }
+        .score-box { 
+            background-color: #2a2a2a;
+            color: #00ff00;
+            font-weight: 900; 
+            font-size: 1.4rem; 
+            padding: 5px 15px;
+            border-radius: 5px;
+            min-width: 80px;
+            display: inline-block;
+        }
+        .badge-live { 
+            background-color: #ff0000; 
+            color: white;
+            padding: 5px 10px;
+            animation: blinker 1.5s linear infinite; 
+        }
+        @keyframes blinker { 50% { opacity: 0; } }
+    </style>
 </head>
-<body class="bg-light">
-    <div class="container text-center py-5">
-        <h1 class="display-4 fw-bold text-dark">Můj Django Projekt</h1>
-        <p class="lead">David Kyndl - Ročníková práce 2026</p>
-        <hr>
-        <div class="alert alert-success">Server běží a vše je správně propojeno!</div>
+<body>
+
+    <nav class="navbar navbar-dark mb-4 shadow">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <span class="ls-green">LIVE</span>SPORT <small class="text-muted">RP 2026</small>
+            </a>
+            <a href="/admin" class="btn btn-outline-success btn-sm">Admin Panel</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h3 class="mb-4">Aktuální zápasy</h3>
+
+                {% for m in zapasy %}
+                <div class="card card-match p-3 shadow-sm">
+                    <div class="row align-items-center text-center">
+                        <div class="col-2">{{ m.start_time|date:"H:i" }}</div>
+                        <div class="col-3 text-end fw-bold">{{ m.home_team.name }}</div>
+                        <div class="col-2">
+                            <div class="score-box">{{ m.home_score }} : {{ m.away_score }}</div>
+                        </div>
+                        <div class="col-3 text-start fw-bold">{{ m.away_team.name }}</div>
+                        <div class="col-2">
+                            {% if m.status == 'LIVE' %}
+                                <span class="badge badge-live">LIVE</span>
+                            {% elif m.status == 'FIN' %}
+                                <span class="badge bg-secondary">KONEC</span>
+                            {% else %}
+                                <span class="small">Příští</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="alert alert-dark text-center">Zatím žádné zápasy.</div>
+                {% endfor %}
+
+            </div>
+        </div>
     </div>
 </body>
 </html>
