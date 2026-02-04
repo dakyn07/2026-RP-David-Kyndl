@@ -5,8 +5,19 @@ class Team(models.Model):
         ('CHANCE', 'Chance Liga'),
         ('NHL', 'NHL'),
     ]
+    
+    # Přidáváme divize pro NHL
+    DIVISION_CHOICES = [
+        ('CZE', 'Česko'), # Pro Chance Ligu
+        ('ATL', 'Atlantická divize'),
+        ('MET', 'Metropolitní divize'),
+        ('CEN', 'Centrální divize'),
+        ('PAC', 'Pacifická divize'),
+    ]
+
     name = models.CharField(max_length=100)
     league = models.CharField(max_length=20, choices=LEAGUE_CHOICES, default='CHANCE')
+    division = models.CharField(max_length=5, choices=DIVISION_CHOICES, default='CZE')
     logo_url = models.URLField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
@@ -17,7 +28,13 @@ class Player(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='players')
     name = models.CharField(max_length=100)
     number = models.IntegerField()
-    position = models.CharField(max_length=50, choices=[('GK', 'Brankář'), ('DF', 'Obránce'), ('MD', 'Záložník'), ('FW', 'Útočník')])
+    # Rozšířil jsem zkratky, aby hokejisti mohli být 'DF' (Defense) i 'MD' (nepovinné)
+    position = models.CharField(max_length=50, choices=[
+        ('GK', 'Brankář'), 
+        ('DF', 'Obránce'), 
+        ('MD', 'Záložník'), 
+        ('FW', 'Útočník')
+    ])
 
     def __str__(self):
         return f"{self.number}. {self.name}"
