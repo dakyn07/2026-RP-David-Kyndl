@@ -86,7 +86,7 @@ class Command(BaseCommand):
 
 
 
-# --- NHL: ATLANTICKÁ DIVIZE ---
+            # --- NHL: ATLANTICKÁ DIVIZE ---
             "Boston Bruins": [(1, "Jeremy Swayman", "GK"), (73, "Charlie McAvoy", "DF"), (88, "David Pastrňák", "FW"), (63, "Brad Marchand", "FW"), (18, "Pavel Zacha", "FW")],
             "Florida Panthers": [(72, "Sergei Bobrovsky", "GK"), (5, "Aaron Ekblad", "DF"), (16, "Aleksander Barkov", "FW"), (19, "Matthew Tkachuk", "FW")],
             "Toronto Maple Leafs": [(60, "Joseph Woll", "GK"), (44, "Morgan Rielly", "DF"), (34, "Auston Matthews", "FW"), (16, "Mitch Marner", "FW")],
@@ -94,8 +94,32 @@ class Command(BaseCommand):
             "Detroit Red Wings": [(39, "Ville Husso", "GK"), (53, "Moritz Seider", "DF"), (71, "Dylan Larkin", "FW"), (23, "Lucas Raymond", "FW")],
             "Buffalo Sabres": [(1, "Ukko-Pekka Luukkonen", "GK"), (26, "Rasmus Dahlin", "DF"), (72, "Tage Thompson", "FW"), (12, "Jiří Kulich", "FW")],
             "Ottawa Senators": [(35, "Linus Ullmark", "GK"), (72, "Thomas Chabot", "DF"), (7, "Brady Tkachuk", "FW"), (18, "Tim Stützle", "FW")],
-            "Montreal Canadiens": [(35, "Sam Montembeault", "GK"), (8, "Mike Matheson", "DF"), (14, "Nick Suzuki", "FW"), (20, "Juraj Slafkovský", "FW")],
-
+            "Montreal Canadiens": [
+                (35, "Samuel Montembeault", "GK"),
+                (75, "Jakub Dobeš", "GK"),
+                (53, "Noah Dobson", "DF"),
+                (21, "Kaiden Guhle", "DF"),
+                (45, "Alexandre Carrier", "DF"),
+                (72, "Arber Xhekaj", "DF"),
+                (47, "Jayden Struble", "DF"),
+                (48, "Lane Hutson", "DF"),
+                (8, "Mike Matheson", "DF"),
+                (20, "Juraj Slafkovský", "FW"),
+                (14, "Nick Suzuki", "FW"),
+                (13, "Cole Caufield", "FW"),
+                (92, "Patrik Laine", "FW"),
+                (77, "Kirby Dach", "FW"),
+                (93, "Ivan Demidov", "FW"),
+                (15, "Alex Newhook", "FW"),
+                (11, "Brendan Gallagher", "FW"),
+                (17, "Josh Anderson", "FW"),
+                (24, "Phillip Danault", "FW"),
+                (71, "Jake Evans", "FW"),
+                (90, "Joseph Veleno", "FW"),
+                (76, "Zachary Bolduc", "FW"),
+                (85, "Alexandre Texier", "FW"),
+                (91, "Oliver Kapanen", "FW"),
+            ],
             # --- NHL: METROPOLITNÍ DIVIZE ---
             "New York Rangers": [(31, "Igor Shesterkin", "GK"), (23, "Adam Fox", "DF"), (10, "Artemi Panarin", "FW"), (93, "Mika Zibanejad", "FW")],
             "Carolina Hurricanes": [(31, "Frederik Andersen", "GK"), (74, "Jaccob Slavin", "DF"), (88, "Martin Nečas", "FW"), (20, "Sebastian Aho", "FW")],

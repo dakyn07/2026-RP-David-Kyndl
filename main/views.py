@@ -3,11 +3,13 @@ from .models import Team, Match, Player
 from django.utils import timezone
 from django.db.models import Q, Case, When, IntegerField
 
-# Upravená pomocná funkce, aby uměla filtrovat i divize
+# Pomocná funkce s dynamickým bodováním
 def get_table_data(league_code, division_code=None):
+    # Pro NHL (v jakékoliv velikosti písmen) nastavíme 2 body, pro ostatní 3
+    win_points = 2 if league_code.upper() == 'NHL' else 3
+    
     teams = Team.objects.filter(league=league_code)
     
-    # Pokud je zadána divize, filtrujeme podle ní
     if division_code:
         teams = teams.filter(division=division_code)
         
@@ -20,6 +22,7 @@ def get_table_data(league_code, division_code=None):
             'goals_scored': 0, 
             'goals_conceded': 0
         }
+        # Hledáme pouze ukončené zápasy daného týmu
         team_matches = Match.objects.filter(Q(home_team=team) | Q(away_team=team)).filter(status='FIN')
         
         for m in team_matches:
@@ -27,17 +30,25 @@ def get_table_data(league_code, division_code=None):
             if m.home_team == team:
                 stats['goals_scored'] += m.home_score
                 stats['goals_conceded'] += m.away_score
-                if m.home_score > m.away_score: stats['points'] += 3
-                elif m.home_score == m.away_score: stats['points'] += 1
+                # Výhra domácích
+                if m.home_score > m.away_score: 
+                    stats['points'] += win_points
+                # Remíza (v NHL bod pro oba)
+                elif m.home_score == m.away_score: 
+                    stats['points'] += 1
             else:
                 stats['goals_scored'] += m.away_score
                 stats['goals_conceded'] += m.home_score
-                if m.away_score > m.home_score: stats['points'] += 3
-                elif m.away_score == m.home_score: stats['points'] += 1
+                # Výhra hostů
+                if m.away_score > m.home_score: 
+                    stats['points'] += win_points
+                # Remíza
+                elif m.away_score == m.home_score: 
+                    stats['points'] += 1
         table.append(stats)
     
-    # Seřazení podle bodů
-    return sorted(table, key=lambda x: x['points'], reverse=True)
+    # Seřazení podle bodů a následně podle rozdílu skóre (běžné v tabulkách)
+    return sorted(table, key=lambda x: (x['points'], x['goals_scored'] - x['goals_conceded']), reverse=True)
 
 def home(request):
     matches = Match.objects.all().order_by('start_time')
