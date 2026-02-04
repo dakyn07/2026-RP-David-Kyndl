@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -11,10 +12,15 @@
         :root {
             --bg-dark: #0b0e11;      
             --card-bg: #151921;      
-            --table-grey: #242933;   
+            --table-grey: #1e232b;   
             --accent: #00ff41;       
             --text-main: #ffffff;
             --text-dim: #a0a6ac;
+            /* Barvy pozic */
+            --pos-gk: #ffc107;
+            --pos-df: #0d6efd;
+            --pos-md: #198754;
+            --pos-fw: #dc3545;
         }
 
         body { 
@@ -22,25 +28,50 @@
             color: var(--text-main); 
             font-family: 'Inter', sans-serif;
             margin: 0;
+            padding-bottom: 50px;
         }
 
+        /* Navbar */
         .navbar {
             background: rgba(21, 25, 33, 0.9) !important;
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             padding: 1.2rem 0;
         }
-
         .ls-green { color: var(--accent); font-weight: 800; }
 
+        /* Hlavička týmu */
+        .team-header-section {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(to bottom, rgba(0, 255, 65, 0.05), transparent);
+            margin-bottom: 30px;
+        }
+        .team-logo-lg {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(0,0,0,0.5));
+        }
+
+        /* Karty a kontejnery */
         .section-title {
             text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 0.1rem;
-            color: var(--text-dim);
+            font-size: 0.8rem;
+            letter-spacing: 0.15rem;
+            color: var(--accent);
             font-weight: 800;
-            margin-bottom: 20px;
-            margin-top: 30px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: rgba(0, 255, 65, 0.2);
+            margin-left: 15px;
         }
 
         .card-container {
@@ -48,81 +79,67 @@
             border-radius: 20px;
             padding: 25px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            margin-bottom: 30px;
+            height: 100%;
         }
 
+        /* Hráči - Řádky */
         .player-row {
             background-color: var(--table-grey);
-            padding: 16px 20px;
-            margin-bottom: 8px;
+            padding: 12px 18px;
+            margin-bottom: 10px;
             border-radius: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: transform 0.2s, background-color 0.2s;
-            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-left: 4px solid transparent;
+            transition: transform 0.2s;
         }
-
-        .player-row:hover {
-            background-color: #2d3440;
-            transform: scale(1.005);
-        }
+        .player-row:hover { transform: translateX(5px); background-color: #252a33; }
+        
+        /* Barevné kódování pozic */
+        .pos-GK { border-left-color: var(--pos-gk); }
+        .pos-DF { border-left-color: var(--pos-df); }
+        .pos-MD { border-left-color: var(--pos-md); }
+        .pos-FW { border-left-color: var(--pos-fw); }
 
         .player-number {
+            font-weight: 800;
             color: var(--text-dim);
-            margin-right: 12px;
-            font-weight: 600;
+            width: 30px;
+            display: inline-block;
         }
-
-        .player-name {
-            font-weight: 700;
-            color: var(--text-main);
-        }
+        .player-name { font-weight: 600; }
 
         .position-badge {
-            background: rgba(0, 255, 65, 0.1);
-            color: var(--accent);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            border: 1px solid rgba(0, 255, 65, 0.2);
-            font-size: 0.85rem;
-        }
-
-        .match-row {
-            background-color: var(--table-grey);
-            padding: 16px 20px;
-            margin-bottom: 8px;
-            border-radius: 12px;
-            transition: transform 0.2s, background-color 0.2s;
-            border: 1px solid rgba(255, 255, 255, 0.02);
-        }
-
-        .match-row:hover {
-            background-color: #2d3440;
-            transform: scale(1.005);
-        }
-
-        .match-teams {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .team-name-match {
-            font-weight: 600;
-            color: var(--text-main);
-        }
-
-        .match-score {
-            background: #000;
-            padding: 8px 16px;
-            border-radius: 8px;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 6px;
             font-weight: 800;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Zápasy */
+        .match-card {
+            background: var(--table-grey);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .match-team-name { font-weight: 600; font-size: 0.9rem; width: 40%; }
+        .match-score-pill {
+            background: #000;
             color: var(--accent);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            min-width: 70px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 65, 0.3);
         }
 
         .btn-back {
@@ -133,80 +150,81 @@
             padding: 10px 20px;
             text-decoration: none;
             transition: 0.3s;
+            font-weight: 600;
         }
+        .btn-back:hover { background: var(--accent); color: black; }
 
-        .btn-back:hover { 
-            background: var(--accent); 
-            color: black; 
-            font-weight: bold;
-        }
-
-        .team-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .team-logo {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 20px;
-            object-fit: contain;
+        @media (max-width: 768px) {
+            .match-team-name { font-size: 0.8rem; }
+            .team-logo-lg { width: 80px; height: 80px; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-dark mb-5">
-        <div class="container text-center">
+    <nav class="navbar navbar-dark mb-0">
+        <div class="container justify-content-center">
             <a class="navbar-brand m-0" href="/">
                 <span class="ls-green">Dakyn</span>Score
             </a>
         </div>
     </nav>
 
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-end mb-5">
-            <div class="team-header flex-grow-1">
-                {% if team.logo_url %}
-                    <img src="{{ team.logo_url }}" alt="{{ team.name }}" class="team-logo">
-                {% endif %}
-                <h1 class="fw-extrabold m-0" style="font-weight: 800; font-size: 2.5rem;">{{ team.name }}</h1>
-            </div>
-            <a href="/" class="btn-back">Zpět domů</a>
+    <div class="team-header-section">
+        <div class="container text-center">
+            {% if team.logo_url %}
+                <img src="{{ team.logo_url }}" alt="{{ team.name }}" class="team-logo-lg">
+            {% endif %}
+            <h1 style="font-weight: 800; font-size: clamp(2rem, 8vw, 3.5rem);">{{ team.name }}</h1>
+            <p class="text-muted text-uppercase mb-4" style="letter-spacing: 3px;">{{ team.get_league_display }}</p>
+            <a href="javascript:history.back()" class="btn-back">← Zpět na tabulku</a>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-lg-6">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-7">
                 <div class="card-container">
-                    <h4 class="section-title">Soupiska</h4>
-                    {% for p in players %}
-                    <div class="player-row">
-                        <div>
-                            <span class="player-number">{{ p.number }}</span>
-                            <span class="player-name">{{ p.name }}</span>
+                    <h4 class="section-title">Soupiska týmu</h4>
+                    <div class="row">
+                        {% for p in players %}
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="player-row pos-{{ p.position }}">
+                                <div>
+                                    <span class="player-number">#{{ p.number }}</span>
+                                    <span class="player-name">{{ p.name }}</span>
+                                </div>
+                                <span class="position-badge">{{ p.get_position_display }}</span>
+                            </div>
                         </div>
-                        <span class="position-badge">{{ p.get_position_display }}</span>
+                        {% empty %}
+                        <div class="col-12 text-center py-5">
+                            <p class="text-muted">Tým zatím nemá žádné hráče.</p>
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% empty %}
-                    <p class="text-muted">Nenalezeni žádní hráči.</p>
-                    {% endfor %}
                 </div>
             </div>
-            
-            <div class="col-lg-6">
+
+            <div class="col-lg-5">
                 <div class="card-container">
-                    <h4 class="section-title">Poslední zápasy</h4>
+                    <h4 class="section-title">Poslední výsledky</h4>
                     {% for m in past_matches %}
-                    <div class="match-row">
-                        <div class="match-teams">
-                            <span class="team-name-match">{{ m.home_team.name }}</span>
-                            <span class="match-score">{{ m.home_score }}:{{ m.away_score }}</span>
-                            <span class="team-name-match">{{ m.away_team.name }}</span>
-                        </div>
+                    <div class="match-card">
+                        <div class="match-team-name text-end pe-2">{{ m.home_team.name }}</div>
+                        <div class="match-score-pill">{{ m.home_score }}:{{ m.away_score }}</div>
+                        <div class="match-team-name text-start ps-2">{{ m.away_team.name }}</div>
                     </div>
                     {% empty %}
-                    <p class="text-muted">Zatím nejsou žádné zápasy.</p>
+                    <div class="text-center py-5">
+                        <p class="text-muted">Žádné odehrané zápasy.</p>
+                    </div>
                     {% endfor %}
+                    
+                    {% if team.description %}
+                    <h4 class="section-title mt-5">O klubu</h4>
+                    <p class="text-dim small" style="line-height: 1.6;">{{ team.description }}</p>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Team, Match, Player
 from django.utils import timezone
-from django.db.models import Q
+from django.db.models import Q, Case, When, IntegerField
 
 def get_table_data(league_code):
     teams = Team.objects.filter(league=league_code)
@@ -49,8 +49,32 @@ def league_view(request, league_code):
         'league_name': league_name
     })
 
+from django.shortcuts import render, get_object_or_404
+from .models import Team, Match, Player
+from django.db.models import Q
+
 def team_detail(request, team_id):
     team = get_object_or_404(Team, pk=team_id)
-    players = team.players.all().order_by('number')
-    all_matches = Match.objects.filter(Q(home_team=team) | Q(away_team=team)).order_by('-start_time')
-    return render(request, 'team_detail.html', {'team': team, 'players': players, 'matches': all_matches})
+    
+    # Definujeme pořadí pozic
+    players = team.players.all().annotate(
+        position_order=Case(
+            When(position='GK', then=1),
+            When(position='DF', then=2),
+            When(position='MD', then=3),
+            When(position='FW', then=4),
+            output_field=IntegerField(),
+        )
+    ).order_by('position_order', 'number') # Nejdřív podle pozice, pak podle čísla dresu
+    
+    # Zápasy zůstávají stejné
+    past_matches = Match.objects.filter(
+        Q(home_team=team) | Q(away_team=team),
+        status='FIN'
+    ).order_by('-start_time')[:5]
+    
+    return render(request, 'team_detail.html', {
+        'team': team, 
+        'players': players, 
+        'past_matches': past_matches
+    })
