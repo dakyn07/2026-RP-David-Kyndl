@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from main.models import Team
 
 class Command(BaseCommand):
-    help = 'Naplní DakynScore aktuálními týmy fotbalové Chance Ligy 25/26 se Zlínem'
+    help = 'Naplní DakynScore aktuálními týmy fotbalové Chance Ligy 25/26'
 
     def handle(self, *args, **kwargs):
         chance_liga_25_26 = [
