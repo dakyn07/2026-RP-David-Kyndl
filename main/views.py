@@ -16,7 +16,7 @@ def get_table_data(league_code, division_code=None):
         stats = {
             'team': team, 
             'played': 0, 
-            'points': 0, 
+            'points': 0,  
             'goals_scored': 0, 
             'goals_conceded': 0
         }
