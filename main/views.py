@@ -3,13 +3,11 @@ from .models import Team, Match, Player
 from django.utils import timezone
 from django.db.models import Q, Case, When, IntegerField
 
-# Pomocná funkce s dynamickým bodováním
+# Pomocná funkce pro výpočet tabulek
 def get_table_data(league_code, division_code=None):
-    # Pro NHL (v jakékoliv velikosti písmen) nastavíme 2 body, pro ostatní 3
     win_points = 2 if league_code.upper() == 'NHL' else 3
     
     teams = Team.objects.filter(league=league_code)
-    
     if division_code:
         teams = teams.filter(division=division_code)
         
@@ -22,38 +20,44 @@ def get_table_data(league_code, division_code=None):
             'goals_scored': 0, 
             'goals_conceded': 0
         }
-        # Hledáme pouze ukončené zápasy daného týmu
-        team_matches = Match.objects.filter(Q(home_team=team) | Q(away_team=team)).filter(status='FIN')
+        # Počítáme jen zápasy, které jsou označené jako FIN (dokončené)
+        team_matches = Match.objects.filter(
+            Q(home_team=team) | Q(away_team=team)
+        ).filter(status='FIN')
         
         for m in team_matches:
             stats['played'] += 1
             if m.home_team == team:
                 stats['goals_scored'] += m.home_score
                 stats['goals_conceded'] += m.away_score
-                # Výhra domácích
                 if m.home_score > m.away_score: 
                     stats['points'] += win_points
-                # Remíza (v NHL bod pro oba)
                 elif m.home_score == m.away_score: 
                     stats['points'] += 1
             else:
                 stats['goals_scored'] += m.away_score
                 stats['goals_conceded'] += m.home_score
-                # Výhra hostů
                 if m.away_score > m.home_score: 
                     stats['points'] += win_points
-                # Remíza
                 elif m.away_score == m.home_score: 
                     stats['points'] += 1
         table.append(stats)
     
-    # Seřazení podle bodů a následně podle rozdílu skóre (běžné v tabulkách)
     return sorted(table, key=lambda x: (x['points'], x['goals_scored'] - x['goals_conceded']), reverse=True)
 
+# Hlavní strana
 def home(request):
-    matches = Match.objects.all().order_by('start_time')
-    return render(request, 'index.html', {'zapasy': matches})
+    now = timezone.now()
+    # Rozdělení na budoucí a minulé zápasy
+    upcoming = Match.objects.filter(start_time__gte=now).order_by('start_time')
+    past = Match.objects.filter(start_time__lt=now).order_by('-start_time')
+    
+    return render(request, 'index.html', {
+        'upcoming': upcoming,
+        'past': past
+    })
 
+# Tabulky lig
 def league_view(request, league_code):
     l_code = league_code.upper()
     league_name = "Chance Liga" if l_code == 'CHANCE' else l_code
@@ -75,9 +79,9 @@ def league_view(request, league_code):
     
     return render(request, 'league_table.html', context)
 
+# Detail týmu
 def team_detail(request, team_id):
     team = get_object_or_404(Team, pk=team_id)
-    
     players = team.players.all().annotate(
         position_order=Case(   
             When(position='GK', then=1),

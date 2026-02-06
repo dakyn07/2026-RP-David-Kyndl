@@ -102,6 +102,7 @@
             align-items: center;
             justify-content: center;
             margin-right: 12px;
+            overflow: hidden;
         }
 
         .live-dot {
@@ -140,16 +141,50 @@
     <div class="container">
         <div class="row g-5">
             <div class="col-lg-8">
-                <h4 class="mb-4">Dnešní zápasy</h4>
                 
-                {% for m in zapasy %}
+                <h4 class="mb-4">Nadcházející zápasy</h4>
+                {% for m in upcoming %}
                 <div class="card card-match">
                     <div class="row align-items-center">
                         <div class="col-2 text-center">
-                            <div class="time-badge">{{ m.start_time|date:"H:i" }}</div>
+                            <div class="time-badge">{{ m.start_time|date:"d.m. H:i" }}</div>
                             {% if m.status == 'LIVE' %}
                                 <div class="small text-danger mt-1"><span class="live-dot"></span>LIVE</div>
                             {% endif %}
+                        </div>
+                        
+                        <div class="col-4 text-end d-flex align-items-center justify-content-end">
+                            <a href="{% url 'team_detail' m.home_team.id %}" class="team-name">{{ m.home_team.name }}</a>
+                            {% if m.home_team.logo_url %}
+                                <img src="{{ m.home_team.logo_url }}" width="32" height="32" class="ms-3">
+                            {% endif %}
+                        </div>
+
+                        <div class="col-2 text-center">
+                            <div class="score-display">VS</div>
+                        </div>
+
+                        <div class="col-4 text-start d-flex align-items-center">
+                            {% if m.away_team.logo_url %}
+                                <img src="{{ m.away_team.logo_url }}" width="32" height="32" class="me-3">
+                            {% endif %}
+                            <a href="{% url 'team_detail' m.away_team.id %}" class="team-name">{{ m.away_team.name }}</a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-muted mb-5">Žádné naplánované zápasy.</p>
+                {% endfor %}
+
+
+                <h4 class="mb-4 mt-5">Nedávné výsledky</h4>
+                {% for m in past %}
+                <div class="card card-match"> <div class="row align-items-center">
+                        <div class="col-2 text-center">
+                            <div class="time-badge" style="color: var(--accent);">
+                                {% if m.status == 'FIN' %}KONEC{% else %}{{ m.status }}{% endif %}
+                            </div>
+                            <div class="small text-white">{{ m.start_time|date:"d.m." }}</div>
                         </div>
                         
                         <div class="col-4 text-end d-flex align-items-center justify-content-end">
@@ -172,9 +207,7 @@
                     </div>
                 </div>
                 {% empty %}
-                <div class="text-center py-5">
-                    <p class="text-muted">Dnes se nehrají žádné zápasy.</p>
-                </div>
+                <p class="text-muted">Zatím nebyly odehrány žádné zápasy.</p>
                 {% endfor %}
             </div>
 

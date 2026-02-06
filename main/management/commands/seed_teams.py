@@ -17,7 +17,7 @@ class Command(BaseCommand):
         nhl_divisions = {
             'ATL': [
             {"name": "Boston Bruins", "logo": "https://cdn.freebiesupply.com/logos/large/2x/boston-bruins-logo.png"},
-            {"name": "Florida Panthers", "logo": "https://example.com/panthers_logo.png"},
+            {"name": "Florida Panthers", "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Florida_Panthers_2016_logo.svg/1280px-Florida_Panthers_2016_logo.svg.png"},
             {"name": "Montreal Canadiens", "logo": "https://cdn.freebiesupply.com/logos/large/2x/montreal-canadiens-logo.png"},
             {"name": "Ottawa Senators", "logo": "https://example.com/senators_logo.png"},
             {"name": "Tampa Bay Lightning", "logo": "https://example.com/lightning_logo.png"},
