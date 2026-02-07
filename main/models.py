@@ -1,20 +1,11 @@
 from django.db import models
 
 class Team(models.Model):
-    LEAGUE_CHOICES = [
-        ('CHANCE', 'Chance Liga'),
-        ('NHL', 'NHL'),
-    ]
-    
-    # Přidáváme divize pro NHL
+    LEAGUE_CHOICES = [('CHANCE', 'Chance Liga'), ('NHL', 'NHL')]
     DIVISION_CHOICES = [
-        ('CZE', 'Česko'), # Pro Chance Ligu
-        ('ATL', 'Atlantická divize'),
-        ('MET', 'Metropolitní divize'),
-        ('CEN', 'Centrální divize'),
-        ('PAC', 'Pacifická divize'),
+        ('CZE', 'Česko'), ('ATL', 'Atlantická divize'),
+        ('MET', 'Metropolitní divize'), ('CEN', 'Centrální divize'), ('PAC', 'Pacifická divize'),
     ]
-
     name = models.CharField(max_length=100)
     league = models.CharField(max_length=20, choices=LEAGUE_CHOICES, default='CHANCE')
     division = models.CharField(max_length=5, choices=DIVISION_CHOICES, default='CZE')
@@ -28,12 +19,8 @@ class Player(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='players')
     name = models.CharField(max_length=100)
     number = models.IntegerField()
-    # Rozšířil jsem zkratky, aby hokejisti mohli být 'DF' (Defense) i 'MD' (nepovinné)
     position = models.CharField(max_length=50, choices=[
-        ('GK', 'Brankář'), 
-        ('DF', 'Obránce'), 
-        ('MD', 'Záložník'), 
-        ('FW', 'Útočník')
+        ('GK', 'Brankář'), ('DF', 'Obránce'), ('MD', 'Záložník'), ('FW', 'Útočník')
     ])
 
     def __str__(self):
@@ -50,3 +37,10 @@ class Match(models.Model):
 
     def __str__(self):
         return f"{self.home_team} vs {self.away_team}"
+
+class Goal(models.Model):
+    match = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='goals')
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.player.name} ({self.match})"

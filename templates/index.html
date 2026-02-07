@@ -30,7 +30,7 @@
             padding: 1.2rem 0;
         }
 
-        .navbar-brand { font-weight: 800; font-size: 1.5rem; }
+        .navbar-brand { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: white; }
         .ls-green { color: var(--accent); }
 
         .card-match { 
@@ -48,11 +48,17 @@
             border-color: rgba(0, 255, 65, 0.3);
         }
 
+        .team-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+        }
+
         .team-name {
             font-weight: 600;
             font-size: 1.05rem;
             color: var(--text-main);
-            text-decoration: none;
         }
 
         .score-display {
@@ -62,9 +68,17 @@
             font-weight: 800;
             color: var(--accent);
             font-size: 1.3rem;
-            min-width: 85px;
+            min-width: 90px;
             display: inline-block;
             border: 1px solid rgba(255,255,255,0.1);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .score-display:hover {
+            background: #00ff41;
+            color: #000;
+            border-color: #00ff41;
         }
 
         .time-badge {
@@ -72,6 +86,13 @@
             font-size: 0.85rem;
             font-weight: 600;
             text-transform: uppercase;
+        }
+
+        .goal-scorers {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 8px;
+            font-style: italic;
         }
 
         .league-nav-item {
@@ -145,30 +166,34 @@
                 <h4 class="mb-4">Nadcházející zápasy</h4>
                 {% for m in upcoming %}
                 <div class="card card-match">
-                    <div class="row align-items-center">
-                        <div class="col-2 text-center">
+                    <div class="row align-items-center text-center">
+                        <div class="col-2">
                             <div class="time-badge">{{ m.start_time|date:"d.m. H:i" }}</div>
                             {% if m.status == 'LIVE' %}
                                 <div class="small text-danger mt-1"><span class="live-dot"></span>LIVE</div>
                             {% endif %}
                         </div>
                         
-                        <div class="col-4 text-end d-flex align-items-center justify-content-end">
-                            <a href="{% url 'team_detail' m.home_team.id %}" class="team-name">{{ m.home_team.name }}</a>
-                            {% if m.home_team.logo_url %}
-                                <img src="{{ m.home_team.logo_url }}" width="32" height="32" class="ms-3">
-                            {% endif %}
+                        <div class="col-4 d-flex align-items-center justify-content-end">
+                            <a href="{% url 'team_detail' m.home_team.id %}" class="team-link">
+                                <span class="team-name">{{ m.home_team.name }}</span>
+                                {% if m.home_team.logo_url %}
+                                    <img src="{{ m.home_team.logo_url }}" width="32" height="32" class="ms-3">
+                                {% endif %}
+                            </a>
                         </div>
 
-                        <div class="col-2 text-center">
-                            <div class="score-display">VS</div>
+                        <div class="col-2">
+                            <a href="{% url 'match_detail' m.id %}" class="score-display">VS</a>
                         </div>
 
-                        <div class="col-4 text-start d-flex align-items-center">
-                            {% if m.away_team.logo_url %}
-                                <img src="{{ m.away_team.logo_url }}" width="32" height="32" class="me-3">
-                            {% endif %}
-                            <a href="{% url 'team_detail' m.away_team.id %}" class="team-name">{{ m.away_team.name }}</a>
+                        <div class="col-4 d-flex align-items-center justify-content-start">
+                            <a href="{% url 'team_detail' m.away_team.id %}" class="team-link">
+                                {% if m.away_team.logo_url %}
+                                    <img src="{{ m.away_team.logo_url }}" width="32" height="32" class="me-3">
+                                {% endif %}
+                                <span class="team-name">{{ m.away_team.name }}</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -179,30 +204,47 @@
 
                 <h4 class="mb-4 mt-5">Nedávné výsledky</h4>
                 {% for m in past %}
-                <div class="card card-match"> <div class="row align-items-center">
-                        <div class="col-2 text-center">
+                <div class="card card-match">
+                    <div class="row align-items-center text-center">
+                        <div class="col-2">
                             <div class="time-badge" style="color: var(--accent);">
                                 {% if m.status == 'FIN' %}KONEC{% else %}{{ m.status }}{% endif %}
                             </div>
                             <div class="small text-white">{{ m.start_time|date:"d.m." }}</div>
                         </div>
                         
-                        <div class="col-4 text-end d-flex align-items-center justify-content-end">
-                            <a href="{% url 'team_detail' m.home_team.id %}" class="team-name">{{ m.home_team.name }}</a>
-                            {% if m.home_team.logo_url %}
-                                <img src="{{ m.home_team.logo_url }}" width="32" height="32" class="ms-3">
-                            {% endif %}
+                        <div class="col-4 d-flex align-items-center justify-content-end">
+                            <a href="{% url 'team_detail' m.home_team.id %}" class="team-link">
+                                <span class="team-name">{{ m.home_team.name }}</span>
+                                {% if m.home_team.logo_url %}
+                                    <img src="{{ m.home_team.logo_url }}" width="32" height="32" class="ms-3">
+                                {% endif %}
+                            </a>
                         </div>
 
-                        <div class="col-2 text-center">
-                            <div class="score-display">{{ m.home_score }} : {{ m.away_score }}</div>
+                        <div class="col-2">
+                            <a href="{% url 'match_detail' m.id %}" class="score-display">
+                                {{ m.home_score }} : {{ m.away_score }}
+                            </a>
                         </div>
 
-                        <div class="col-4 text-start d-flex align-items-center">
-                            {% if m.away_team.logo_url %}
-                                <img src="{{ m.away_team.logo_url }}" width="32" height="32" class="me-3">
-                            {% endif %}
-                            <a href="{% url 'team_detail' m.away_team.id %}" class="team-name">{{ m.away_team.name }}</a>
+                        <div class="col-4 d-flex align-items-center justify-content-start">
+                            <a href="{% url 'team_detail' m.away_team.id %}" class="team-link">
+                                {% if m.away_team.logo_url %}
+                                    <img src="{{ m.away_team.logo_url }}" width="32" height="32" class="me-3">
+                                {% endif %}
+                                <span class="team-name">{{ m.away_team.name }}</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="goal-scorers">
+                                {% for g in m.goals.all %}
+                                    {{ g.player.name }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>

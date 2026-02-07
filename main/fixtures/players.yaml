@@ -1,0 +1,973 @@
+# ==========================================
+# ČESKÁ LIGA - OPRAVENÁ ID TÝMŮ (VERZE 2)
+# ==========================================
+
+# AC SPARTA PRAHA (ID 1)
+- model: main.player
+  pk: 1
+  fields: { team: 1, name: "Peter Vindahl", number: 1, position: "GK" }
+- model: main.player
+  pk: 2
+  fields: { team: 1, name: "Filip Panák", number: 27, position: "DF" }
+- model: main.player
+  pk: 3
+  fields: { team: 1, name: "Asger Sørensen", number: 25, position: "DF" }
+- model: main.player
+  pk: 4
+  fields: { team: 1, name: "Angelo Preciado", number: 17, position: "DF" }
+- model: main.player
+  pk: 5
+  fields: { team: 1, name: "Elias Cobbaut", number: 33, position: "DF" }
+- model: main.player
+  pk: 6
+  fields: { team: 1, name: "Kaan Kairinen", number: 6, position: "MD" }
+- model: main.player
+  pk: 7
+  fields: { team: 1, name: "Lukáš Sadílek", number: 18, position: "MD" }
+- model: main.player
+  pk: 8
+  fields: { team: 1, name: "Veljko Birmančević", number: 14, position: "FW" }
+- model: main.player
+  pk: 9
+  fields: { team: 1, name: "Albion Rrahmani", number: 10, position: "FW" }
+- model: main.player
+  pk: 10
+  fields: { team: 1, name: "Qazim Laçi", number: 20, position: "MD" }
+- model: main.player
+  pk: 11
+  fields: { team: 1, name: "Ermal Krasniqi", number: 29, position: "FW" }
+
+# SK SLAVIA PRAHA (ID 2)
+- model: main.player
+  pk: 12
+  fields: { team: 2, name: "Jindřich Staněk", number: 36, position: "GK" }
+- model: main.player
+  pk: 13
+  fields: { team: 2, name: "Ondřej Kolář", number: 1, position: "GK" }
+- model: main.player
+  pk: 14
+  fields: { team: 2, name: "Tomáš Holeš", number: 3, position: "DF" }
+- model: main.player
+  pk: 15
+  fields: { team: 2, name: "David Zima", number: 4, position: "DF" }
+- model: main.player
+  pk: 16
+  fields: { team: 2, name: "Igoh Ogbu", number: 5, position: "DF" }
+- model: main.player
+  pk: 17
+  fields: { team: 2, name: "Oscar Dorley", number: 19, position: "MD" }
+- model: main.player
+  pk: 18
+  fields: { team: 2, name: "Lukáš Provod", number: 17, position: "MD" }
+- model: main.player
+  pk: 19
+  fields: { team: 2, name: "Christos Zafeiris", number: 10, position: "MD" }
+- model: main.player
+  pk: 20
+  fields: { team: 2, name: "Tomáš Chorý", number: 25, position: "FW" }
+- model: main.player
+  pk: 21
+  fields: { team: 2, name: "Mojmír Chytil", number: 13, position: "FW" }
+- model: main.player
+  pk: 22
+  fields: { team: 2, name: "El Hadji Malick Diouf", number: 12, position: "DF" }
+
+# FC VIKTORIA PLZEŇ (ID 3)
+- model: main.player
+  pk: 23
+  fields: { team: 3, name: "Martin Jedlička", number: 16, position: "GK" }
+- model: main.player
+  pk: 24
+  fields: { team: 3, name: "Lukáš Hejda", number: 2, position: "DF" }
+- model: main.player
+  pk: 25
+  fields: { team: 3, name: "Sampson Dweh", number: 40, position: "DF" }
+- model: main.player
+  pk: 26
+  fields: { team: 3, name: "Cadu", number: 22, position: "DF" }
+- model: main.player
+  pk: 27
+  fields: { team: 3, name: "Lukáš Červ", number: 6, position: "MD" }
+- model: main.player
+  pk: 28
+  fields: { team: 3, name: "Lukáš Kalvach", number: 23, position: "MD" }
+- model: main.player
+  pk: 29
+  fields: { team: 3, name: "Jan Kopic", number: 10, position: "MD" }
+- model: main.player
+  pk: 30
+  fields: { team: 3, name: "Prince Adu", number: 37, position: "FW" }
+- model: main.player
+  pk: 31
+  fields: { team: 3, name: "Erik Jirka", number: 51, position: "MD" }
+- model: main.player
+  pk: 32
+  fields: { team: 3, name: "Rafiu Durosinmi", number: 93, position: "FW" }
+- model: main.player
+  pk: 33
+  fields: { team: 3, name: "Ricardinho", number: 9, position: "FW" }
+
+# FC BANÍK OSTRAVA (ID 4)
+- model: main.player
+  pk: 34
+  fields: { team: 4, name: "Jakub Markovič", number: 30, position: "GK" }
+- model: main.player
+  pk: 35
+  fields: { team: 4, name: "Michal Frydrych", number: 17, position: "DF" }
+- model: main.player
+  pk: 36
+  fields: { team: 4, name: "Patrick Kpozo", number: 15, position: "DF" }
+- model: main.player
+  pk: 37
+  fields: { team: 4, name: "Matěj Šín", number: 10, position: "MD" }
+- model: main.player
+  pk: 38
+  fields: { team: 4, name: "Ewerton", number: 32, position: "FW" }
+- model: main.player
+  pk: 39
+  fields: { team: 4, name: "Jiří Klíma", number: 21, position: "FW" }
+- model: main.player
+  pk: 40
+  fields: { team: 4, name: "David Buchta", number: 9, position: "MD" }
+- model: main.player
+  pk: 41
+  fields: { team: 4, name: "Jiří Boula", number: 5, position: "MD" }
+- model: main.player
+  pk: 42
+  fields: { team: 4, name: "Karel Pojezný", number: 13, position: "DF" }
+
+# FK MLADÁ BOLESLAV (ID 5)
+- model: main.player
+  pk: 43
+  fields: { team: 5, name: "Matouš Trmal", number: 1, position: "GK" }
+- model: main.player
+  pk: 44
+  fields: { team: 5, name: "Marek Suchý", number: 17, position: "DF" }
+- model: main.player
+  pk: 45
+  fields: { team: 5, name: "Vasil Kušej", number: 23, position: "FW" }
+- model: main.player
+  pk: 46
+  fields: { team: 5, name: "Patrik Vydra", number: 10, position: "MD" }
+- model: main.player
+  pk: 47
+  fields: { team: 5, name: "Tomáš Ladra", number: 14, position: "FW" }
+- model: main.player
+  pk: 48
+  fields: { team: 5, name: "Benson Sakala", number: 5, position: "MD" }
+
+# FC SLOVAN LIBEREC (ID 6)
+- model: main.player
+  pk: 49
+  fields: { team: 6, name: "Hugo Jan Bačkovský", number: 1, position: "GK" }
+- model: main.player
+  pk: 50
+  fields: { team: 6, name: "Dominik Plechatý", number: 2, position: "DF" }
+- model: main.player
+  pk: 51
+  fields: { team: 6, name: "Lukáš Letenay", number: 8, position: "FW" }
+- model: main.player
+  pk: 52
+  fields: { team: 6, name: "Ľubomír Tupta", number: 10, position: "FW" }
+- model: main.player
+  pk: 53
+  fields: { team: 6, name: "Ivan Varfolomejev", number: 6, position: "MD" }
+- model: main.player
+  pk: 54
+  fields: { team: 6, name: "Ahmad Ghali", number: 25, position: "MD" }
+
+# SK SIGMA OLOMOUC (ID 7)
+- model: main.player
+  pk: 61
+  fields: { team: 7, name: "Tomáš Digaňa", number: 1, position: "GK" }
+- model: main.player
+  pk: 62
+  fields: { team: 7, name: "Vít Beneš", number: 22, position: "DF" }
+- model: main.player
+  pk: 63
+  fields: { team: 7, name: "Radim Breite", number: 7, position: "MD" }
+- model: main.player
+  pk: 64
+  fields: { team: 7, name: "Filip Zorvan", number: 10, position: "MD" }
+- model: main.player
+  pk: 65
+  fields: { team: 7, name: "Jan Kliment", number: 14, position: "FW" }
+- model: main.player
+  pk: 66
+  fields: { team: 7, name: "Lukáš Juliš", number: 9, position: "FW" }
+
+# FC HRADEC KRÁLOVÉ (ID 8)
+- model: main.player
+  pk: 67
+  fields: { team: 8, name: "Adam Zadražil", number: 1, position: "GK" }
+- model: main.player
+  pk: 68
+  fields: { team: 8, name: "Filip Čihák", number: 5, position: "DF" }
+- model: main.player
+  pk: 69
+  fields: { team: 8, name: "Václav Pilař", number: 6, position: "MD" }
+- model: main.player
+  pk: 70
+  fields: { team: 8, name: "Petr Kodeš", number: 22, position: "MD" }
+- model: main.player
+  pk: 71
+  fields: { team: 8, name: "Daniel Vašulín", number: 21, position: "FW" }
+- model: main.player
+  pk: 72
+  fields: { team: 8, name: "Adam Griger", number: 11, position: "FW" }
+
+# FK TEPLICE (ID 9)
+- model: main.player
+  pk: 85
+  fields: { team: 9, name: "Richard Ludha", number: 1, position: "GK" }
+- model: main.player
+  pk: 86
+  fields: { team: 9, name: "Nemanja Mićević", number: 18, position: "DF" }
+- model: main.player
+  pk: 87
+  fields: { team: 9, name: "Daniel Trubač", number: 20, position: "MD" }
+- model: main.player
+  pk: 88
+  fields: { team: 9, name: "Filip Horský", number: 11, position: "FW" }
+- model: main.player
+  pk: 89
+  fields: { team: 9, name: "Abdoullah Gning", number: 10, position: "FW" }
+- model: main.player
+  pk: 90
+  fields: { team: 9, name: "Jan Mareček", number: 28, position: "MD" }
+
+# FK JABLONEC (ID 10)
+- model: main.player
+  pk: 55
+  fields: { team: 10, name: "Jan Hanuš", number: 1, position: "GK" }
+- model: main.player
+  pk: 56
+  fields: { team: 10, name: "Nemanja Tekijaški", number: 4, position: "DF" }
+- model: main.player
+  pk: 57
+  fields: { team: 10, name: "Jan Fortelný", number: 25, position: "MD" }
+- model: main.player
+  pk: 58
+  fields: { team: 10, name: "Michal Beran", number: 10, position: "MD" }
+- model: main.player
+  pk: 59
+  fields: { team: 10, name: "Jan Chramosta", number: 24, position: "FW" }
+- model: main.player
+  pk: 60
+  fields: { team: 10, name: "Bienvenue Kanakimana", number: 32, position: "FW" }
+
+# Bohemians Praha 1905 (ID 11)
+- model: main.player
+  pk: 73
+  fields: { team: 11, name: "Roman Valeš", number: 1, position: "GK" }
+- model: main.player
+  pk: 74
+  fields: { team: 11, name: "Lukáš Hůlka", number: 28, position: "DF" }
+- model: main.player
+  pk: 75
+  fields: { team: 11, name: "Jan Matoušek", number: 10, position: "MD" }
+- model: main.player
+  pk: 76
+  fields: { team: 11, name: "Jan Kovařík", number: 19, position: "MD" }
+- model: main.player
+  pk: 77
+  fields: { team: 11, name: "Václav Drchal", number: 20, position: "FW" }
+- model: main.player
+  pk: 78
+  fields: { team: 11, name: "Abdulla Yusuf Helal", number: 9, position: "FW" }
+
+# 1.FC Slovácko (ID 12)
+- model: main.player
+  pk: 79
+  fields: { team: 12, name: "Milan Heča", number: 1, position: "GK" }
+- model: main.player
+  pk: 80
+  fields: { team: 12, name: "Stanislav Hofmann", number: 6, position: "DF" }
+- model: main.player
+  pk: 81
+  fields: { team: 12, name: "Milan Petržela", number: 11, position: "MD" }
+- model: main.player
+  pk: 82
+  fields: { team: 12, name: "Michal Kohút", number: 13, position: "MD" }
+- model: main.player
+  pk: 83
+  fields: { team: 12, name: "Rigino Cicilia", number: 22, position: "FW" }
+- model: main.player
+  pk: 84
+  fields: { team: 12, name: "Marek Havlík", number: 10, position: "MD" }
+
+# MFK Karviná (ID 13)
+- model: main.player
+  pk: 91
+  fields: { team: 13, name: "Jakub Lapeš", number: 1, position: "GK" }
+- model: main.player
+  pk: 92
+  fields: { team: 13, name: "Jaroslav Svozil", number: 22, position: "DF" }
+- model: main.player
+  pk: 93
+  fields: { team: 13, name: "Kristián Vallo", number: 10, position: "MD" }
+- model: main.player
+  pk: 94
+  fields: { team: 13, name: "Amar Memić", number: 7, position: "MD" }
+- model: main.player
+  pk: 95
+  fields: { team: 13, name: "Martin Regáli", number: 9, position: "FW" }
+- model: main.player
+  pk: 96
+  fields: { team: 13, name: "Lucky Ezeh", number: 26, position: "FW" }
+
+# FK Pardubice (ID 14)
+- model: main.player
+  pk: 97
+  fields: { team: 14, name: "Viktor Budinský", number: 1, position: "GK" }
+- model: main.player
+  pk: 98
+  fields: { team: 14, name: "Denis Halinský", number: 5, position: "DF" }
+- model: main.player
+  pk: 99
+  fields: { team: 14, name: "Dominik Janošek", number: 10, position: "MD" }
+- model: main.player
+  pk: 100
+  fields: { team: 14, name: "Vojtěch Patrák", number: 24, position: "FW" }
+- model: main.player
+  pk: 101
+  fields: { team: 14, name: "André Leipold", number: 9, position: "FW" }
+- model: main.player
+  pk: 102
+  fields: { team: 14, name: "Tomáš Zlatohlávek", number: 15, position: "FW" }
+
+# FK Dukla Praha (ID 15)
+- model: main.player
+  pk: 114
+  fields: { team: 15, name: "Matúš Hruška", number: 1, position: "GK" }
+- model: main.player
+  pk: 115
+  fields: { team: 15, name: "Jan Peterka", number: 15, position: "DF" }
+- model: main.player
+  pk: 116
+  fields: { team: 15, name: "Jakub Hora", number: 11, position: "MD" }
+- model: main.player
+  pk: 117
+  fields: { team: 15, name: "Muris Mešanović", number: 10, position: "FW" }
+- model: main.player
+  pk: 118
+  fields: { team: 15, name: "Štěpán Šebrle", number: 8, position: "MD" }
+- model: main.player
+  pk: 119
+  fields: { team: 15, name: "Jakub Řezníček", number: 22, position: "FW" }
+
+# FC Zlín (ID 16)
+- model: main.player
+  pk: 103
+  fields: { team: 16, name: "Matej Rakovan", number: 1, position: "GK" }
+- model: main.player
+  pk: 104
+  fields: { team: 16, name: "Stanislav Dostál", number: 17, position: "GK" }
+- model: main.player
+  pk: 105
+  fields: { team: 16, name: "Jakub Černín", number: 4, position: "DF" }
+- model: main.player
+  pk: 106
+  fields: { team: 16, name: "Lukáš Bartošák", number: 14, position: "DF" }
+- model: main.player
+  pk: 107
+  fields: { team: 16, name: "Tomáš Didiba", number: 28, position: "DF" }
+- model: main.player
+  pk: 108
+  fields: { team: 16, name: "Joss Didiba", number: 6, position: "MD" }
+- model: main.player
+  pk: 109
+  fields: { team: 16, name: "Tomáš Poznar", number: 10, position: "FW" }
+- model: main.player
+  pk: 110
+  fields: { team: 16, name: "Youba Dramé", number: 11, position: "FW" }
+- model: main.player
+  pk: 111
+  fields: { team: 16, name: "Vukadin Vukadinović", number: 33, position: "MD" }
+- model: main.player
+  pk: 112
+  fields: { team: 16, name: "Jakub Janetzký", number: 19, position: "MD" }
+- model: main.player
+  pk: 113
+  fields: { team: 16, name: "Rudolf Reiter", number: 7, position: "MD" }
+
+# ==========================================
+# NHL - ATLANTIC DIVISION (ID 101-108)
+# ==========================================
+
+# BOSTON BRUINS (ID 101)
+- model: main.player
+  pk: 200
+  fields: { team: 101, name: "Jeremy Swayman", number: 1, position: "GK" }
+- model: main.player
+  pk: 201
+  fields: { team: 101, name: "Charlie McAvoy", number: 73, position: "DF" }
+- model: main.player
+  pk: 202
+  fields: { team: 101, name: "David Pastrňák", number: 88, position: "FW" }
+- model: main.player
+  pk: 203
+  fields: { team: 101, name: "Brad Marchand", number: 63, position: "FW" }
+- model: main.player
+  pk: 204
+  fields: { team: 101, name: "Pavel Zacha", number: 18, position: "FW" }
+
+# FLORIDA PANTHERS (ID 102)
+- model: main.player
+  pk: 349
+  fields: { team: 102, name: "Sergei Bobrovsky", number: 72, position: "GK" }
+- model: main.player
+  pk: 350
+  fields: { team: 102, name: "Spencer Knight", number: 30, position: "GK" }
+- model: main.player
+  pk: 351
+  fields: { team: 102, name: "Aaron Ekblad", number: 5, position: "DF" }
+- model: main.player
+  pk: 352
+  fields: { team: 102, name: "Gustav Forsling", number: 42, position: "DF" }
+- model: main.player
+  pk: 353
+  fields: { team: 102, name: "Niko Mikkola", number: 77, position: "DF" }
+- model: main.player
+  pk: 354
+  fields: { team: 102, name: "Dmitry Kulikov", number: 7, position: "DF" }
+- model: main.player
+  pk: 355
+  fields: { team: 102, name: "Nate Schmidt", number: 88, position: "DF" }
+- model: main.player
+  pk: 356
+  fields: { team: 102, name: "Uvis Balinskis", number: 26, position: "DF" }
+- model: main.player
+  pk: 357
+  fields: { team: 102, name: "Adam Boqvist", number: 4, position: "DF" }
+- model: main.player
+  pk: 358
+  fields: { team: 102, name: "Aleksander Barkov", number: 16, position: "FW" }
+- model: main.player
+  pk: 359
+  fields: { team: 102, name: "Matthew Tkachuk", number: 19, position: "FW" }
+- model: main.player
+  pk: 360
+  fields: { team: 102, name: "Sam Reinhart", number: 13, position: "FW" }
+- model: main.player
+  pk: 361
+  fields: { team: 102, name: "Sam Bennett", number: 9, position: "FW" }
+- model: main.player
+  pk: 362
+  fields: { team: 102, name: "Carter Verhaeghe", number: 23, position: "FW" }
+- model: main.player
+  pk: 363
+  fields: { team: 102, name: "Anton Lundell", number: 15, position: "FW" }
+- model: main.player
+  pk: 364
+  fields: { team: 102, name: "Evan Rodrigues", number: 17, position: "FW" }
+- model: main.player
+  pk: 365
+  fields: { team: 102, name: "Eetu Luostarinen", number: 27, position: "FW" }
+- model: main.player
+  pk: 366
+  fields: { team: 102, name: "Tomas Nosek", number: 92, position: "FW" }
+- model: main.player
+  pk: 367
+  fields: { team: 102, name: "A.J. Greer", number: 10, position: "FW" }
+- model: main.player
+  pk: 368
+  fields: { team: 102, name: "Mackie Samoskevich", number: 11, position: "FW" }
+- model: main.player
+  pk: 369
+  fields: { team: 102, name: "Jesper Boqvist", number: 70, position: "FW" }
+- model: main.player
+  pk: 370
+  fields: { team: 102, name: "Jonah Gadjovich", number: 12, position: "FW" }
+
+# TORONTO MAPLE LEAFS (ID 106)
+- model: main.player
+  pk: 209
+  fields: { team: 106, name: "Joseph Woll", number: 60, position: "GK" }
+- model: main.player
+  pk: 210
+  fields: { team: 106, name: "Morgan Rielly", number: 44, position: "DF" }
+- model: main.player
+  pk: 211
+  fields: { team: 106, name: "Auston Matthews", number: 34, position: "FW" }
+- model: main.player
+  pk: 212
+  fields: { team: 106, name: "Mitch Marner", number: 16, position: "FW" }
+
+# TAMPA BAY LIGHTNING (ID 105)
+- model: main.player
+  pk: 213
+  fields: { team: 105, name: "Andrei Vasilevskiy", number: 88, position: "GK" }
+- model: main.player
+  pk: 214
+  fields: { team: 105, name: "Victor Hedman", number: 77, position: "DF" }
+- model: main.player
+  pk: 215
+  fields: { team: 105, name: "Nikita Kucherov", number: 86, position: "FW" }
+- model: main.player
+  pk: 216
+  fields: { team: 105, name: "Brayden Point", number: 21, position: "FW" }
+
+# DETROIT RED WINGS (ID 107)
+- model: main.player
+  pk: 217
+  fields: { team: 107, name: "Ville Husso", number: 39, position: "GK" }
+- model: main.player
+  pk: 218
+  fields: { team: 107, name: "Moritz Seider", number: 53, position: "DF" }
+- model: main.player
+  pk: 219
+  fields: { team: 107, name: "Dylan Larkin", number: 71, position: "FW" }
+- model: main.player
+  pk: 220
+  fields: { team: 107, name: "Lucas Raymond", number: 23, position: "FW" }
+
+# BUFFALO SABRES (ID 108)
+- model: main.player
+  pk: 221
+  fields: { team: 108, name: "Ukko-Pekka Luukkonen", number: 1, position: "GK" }
+- model: main.player
+  pk: 222
+  fields: { team: 108, name: "Rasmus Dahlin", number: 26, position: "DF" }
+- model: main.player
+  pk: 223
+  fields: { team: 108, name: "Tage Thompson", number: 72, position: "FW" }
+- model: main.player
+  pk: 224
+  fields: { team: 108, name: "Jiří Kulich", number: 12, position: "FW" }
+
+# OTTAWA SENATORS (ID 104)
+- model: main.player
+  pk: 225
+  fields: { team: 104, name: "Linus Ullmark", number: 35, position: "GK" }
+- model: main.player
+  pk: 226
+  fields: { team: 104, name: "Thomas Chabot", number: 72, position: "DF" }
+- model: main.player
+  pk: 227
+  fields: { team: 104, name: "Brady Tkachuk", number: 7, position: "FW" }
+- model: main.player
+  pk: 228
+  fields: { team: 104, name: "Tim Stützle", number: 18, position: "FW" }
+
+# MONTREAL CANADIENS (ID 103)
+- model: main.player
+  pk: 229
+  fields: { team: 103, name: "Samuel Montembeault", number: 35, position: "GK" }
+- model: main.player
+  pk: 230
+  fields: { team: 103, name: "Jakub Dobeš", number: 75, position: "GK" }
+- model: main.player
+  pk: 231
+  fields: { team: 103, name: "Noah Dobson", number: 53, position: "DF" }
+- model: main.player
+  pk: 232
+  fields: { team: 103, name: "Kaiden Guhle", number: 21, position: "DF" }
+- model: main.player
+  pk: 233
+  fields: { team: 103, name: "Alexandre Carrier", number: 45, position: "DF" }
+- model: main.player
+  pk: 234
+  fields: { team: 103, name: "Arber Xhekaj", number: 72, position: "DF" }
+- model: main.player
+  pk: 235
+  fields: { team: 103, name: "Jayden Struble", number: 47, position: "DF" }
+- model: main.player
+  pk: 236
+  fields: { team: 103, name: "Lane Hutson", number: 48, position: "DF" }
+- model: main.player
+  pk: 237
+  fields: { team: 103, name: "Mike Matheson", number: 8, position: "DF" }
+- model: main.player
+  pk: 238
+  fields: { team: 103, name: "Juraj Slafkovský", number: 20, position: "FW" }
+- model: main.player
+  pk: 239
+  fields: { team: 103, name: "Nick Suzuki", number: 14, position: "FW" }
+- model: main.player
+  pk: 240
+  fields: { team: 103, name: "Cole Caufield", number: 13, position: "FW" }
+- model: main.player
+  pk: 241
+  fields: { team: 103, name: "Patrik Laine", number: 92, position: "FW" }
+- model: main.player
+  pk: 242
+  fields: { team: 103, name: "Kirby Dach", number: 77, position: "FW" }
+- model: main.player
+  pk: 243
+  fields: { team: 103, name: "Ivan Demidov", number: 93, position: "FW" }
+- model: main.player
+  pk: 244
+  fields: { team: 103, name: "Alex Newhook", number: 15, position: "FW" }
+- model: main.player
+  pk: 245
+  fields: { team: 103, name: "Brendan Gallagher", number: 11, position: "FW" }
+- model: main.player
+  pk: 246
+  fields: { team: 103, name: "Josh Anderson", number: 17, position: "FW" }
+- model: main.player
+  pk: 247
+  fields: { team: 103, name: "Phillip Danault", number: 24, position: "FW" }
+- model: main.player
+  pk: 248
+  fields: { team: 103, name: "Jake Evans", number: 71, position: "FW" }
+- model: main.player
+  pk: 249
+  fields: { team: 103, name: "Joseph Veleno", number: 90, position: "FW" }
+- model: main.player
+  pk: 250
+  fields: { team: 103, name: "Zachary Bolduc", number: 76, position: "FW" }
+- model: main.player
+  pk: 251
+  fields: { team: 103, name: "Alexandre Texier", number: 85, position: "FW" }
+- model: main.player
+  pk: 252
+  fields: { team: 103, name: "Oliver Kapanen", number: 91, position: "FW" }
+
+# ==========================================
+# NHL - METROPOLITAN DIVISION (201-208)
+# ==========================================
+
+# NEW YORK RANGERS (ID 201)
+- model: main.player
+  pk: 253
+  fields: { team: 201, name: "Igor Shesterkin", number: 31, position: "GK" }
+- model: main.player
+  pk: 254
+  fields: { team: 201, name: "Adam Fox", number: 23, position: "DF" }
+- model: main.player
+  pk: 255
+  fields: { team: 201, name: "Artemi Panarin", number: 10, position: "FW" }
+- model: main.player
+  pk: 256
+  fields: { team: 201, name: "Mika Zibanejad", number: 93, position: "FW" }
+
+# CAROLINA HURRICANES (ID 207)
+- model: main.player
+  pk: 257
+  fields: { team: 207, name: "Frederik Andersen", number: 31, position: "GK" }
+- model: main.player
+  pk: 258
+  fields: { team: 207, name: "Jaccob Slavin", number: 74, position: "DF" }
+- model: main.player
+  pk: 259
+  fields: { team: 207, name: "Martin Nečas", number: 88, position: "FW" }
+- model: main.player
+  pk: 260
+  fields: { team: 207, name: "Sebastian Aho", number: 20, position: "FW" }
+
+# NEW JERSEY DEVILS (ID 203)
+- model: main.player
+  pk: 261
+  fields: { team: 203, name: "Jacob Markström", number: 25, position: "GK" }
+- model: main.player
+  pk: 262
+  fields: { team: 203, name: "Dougie Hamilton", number: 7, position: "DF" }
+- model: main.player
+  pk: 263
+  fields: { team: 203, name: "Jack Hughes", number: 86, position: "FW" }
+- model: main.player
+  pk: 264
+  fields: { team: 203, name: "Ondřej Palát", number: 18, position: "FW" }
+
+# WASHINGTON CAPITALS (ID 206)
+- model: main.player
+  pk: 265
+  fields: { team: 206, name: "Charlie Lindgren", number: 79, position: "GK" }
+- model: main.player
+  pk: 266
+  fields: { team: 206, name: "John Carlson", number: 74, position: "DF" }
+- model: main.player
+  pk: 267
+  fields: { team: 206, name: "Alex Ovechkin", number: 8, position: "FW" }
+- model: main.player
+  pk: 268
+  fields: { team: 206, name: "Jakub Vrána", number: 18, position: "FW" }
+
+# NEW YORK ISLANDERS (ID 202)
+- model: main.player
+  pk: 269
+  fields: { team: 202, name: "Ilya Sorokin", number: 30, position: "GK" }
+- model: main.player
+  pk: 270
+  fields: { team: 202, name: "Noah Dobson", number: 8, position: "DF" }
+- model: main.player
+  pk: 271
+  fields: { team: 202, name: "Mathew Barzal", number: 13, position: "FW" }
+- model: main.player
+  pk: 272
+  fields: { team: 202, name: "Bo Horvat", number: 14, position: "FW" }
+
+# PHILADELPHIA FLYERS (ID 204)
+- model: main.player
+  pk: 273
+  fields: { team: 204, name: "Samuel Ersson", number: 33, position: "GK" }
+- model: main.player
+  pk: 274
+  fields: { team: 204, name: "Travis Sanheim", number: 6, position: "DF" }
+- model: main.player
+  pk: 275
+  fields: { team: 204, name: "Travis Konecny", number: 11, position: "FW" }
+- model: main.player
+  pk: 276
+  fields: { team: 204, name: "Matvei Michkov", number: 94, position: "FW" }
+
+# PITTSBURGH PENGUINS (ID 205)
+- model: main.player
+  pk: 277
+  fields: { team: 205, name: "Tristan Jarry", number: 35, position: "GK" }
+- model: main.player
+  pk: 278
+  fields: { team: 205, name: "Kris Letang", number: 58, position: "DF" }
+- model: main.player
+  pk: 279
+  fields: { team: 205, name: "Sidney Crosby", number: 87, position: "FW" }
+- model: main.player
+  pk: 280
+  fields: { team: 205, name: "Evgeni Malkin", number: 71, position: "FW" }
+
+# COLUMBUS BLUE JACKETS (ID 208)
+- model: main.player
+  pk: 281
+  fields: { team: 208, name: "Elvis Merzlikins", number: 90, position: "GK" }
+- model: main.player
+  pk: 282
+  fields: { team: 208, name: "Zach Werenski", number: 8, position: "DF" }
+- model: main.player
+  pk: 283
+  fields: { team: 208, name: "Kirill Marchenko", number: 86, position: "FW" }
+- model: main.player
+  pk: 284
+  fields: { team: 208, name: "David Jiříček", number: 5, position: "DF" }
+
+# ==========================================
+# NHL - CENTRAL DIVISION (301-308)
+# ==========================================
+
+# DALLAS STARS (ID 303)
+- model: main.player
+  pk: 285
+  fields: { team: 303, name: "Jake Oettinger", number: 29, position: "GK" }
+- model: main.player
+  pk: 286
+  fields: { team: 303, name: "Miro Heiskanen", number: 4, position: "DF" }
+- model: main.player
+  pk: 287
+  fields: { team: 303, name: "Jason Robertson", number: 21, position: "FW" }
+- model: main.player
+  pk: 288
+  fields: { team: 303, name: "Roope Hintz", number: 24, position: "FW" }
+
+# COLORADO AVALANCHE (ID 302)
+- model: main.player
+  pk: 289
+  fields: { team: 302, name: "Alexandar Georgiev", number: 40, position: "GK" }
+- model: main.player
+  pk: 290
+  fields: { team: 302, name: "Cale Makar", number: 8, position: "DF" }
+- model: main.player
+  pk: 291
+  fields: { team: 302, name: "Nathan MacKinnon", number: 29, position: "FW" }
+- model: main.player
+  pk: 292
+  fields: { team: 302, name: "Mikko Rantanen", number: 96, position: "FW" }
+
+# WINNIPEG JETS (ID 307)
+- model: main.player
+  pk: 293
+  fields: { team: 307, name: "Connor Hellebuyck", number: 37, position: "GK" }
+- model: main.player
+  pk: 294
+  fields: { team: 307, name: "Josh Morrissey", number: 44, position: "DF" }
+- model: main.player
+  pk: 295
+  fields: { team: 307, name: "Mark Scheifele", number: 55, position: "FW" }
+- model: main.player
+  pk: 296
+  fields: { team: 307, name: "Kyle Connor", number: 81, position: "FW" }
+
+# NASHVILLE PREDATORS (ID 305)
+- model: main.player
+  pk: 297
+  fields: { team: 305, name: "Juuse Saros", number: 74, position: "GK" }
+- model: main.player
+  pk: 298
+  fields: { team: 305, name: "Roman Josi", number: 59, position: "DF" }
+- model: main.player
+  pk: 299
+  fields: { team: 305, name: "Steven Stamkos", number: 91, position: "FW" }
+- model: main.player
+  pk: 300
+  fields: { team: 305, name: "Filip Forsberg", number: 9, position: "FW" }
+
+# ST. LOUIS BLUES (ID 306)
+- model: main.player
+  pk: 301
+  fields: { team: 306, name: "Jordan Binnington", number: 50, position: "GK" }
+- model: main.player
+  pk: 302
+  fields: { team: 306, name: "Colton Parayko", number: 55, position: "DF" }
+- model: main.player
+  pk: 303
+  fields: { team: 306, name: "Robert Thomas", number: 25, position: "FW" }
+- model: main.player
+  pk: 304
+  fields: { team: 306, name: "Radek Faksa", number: 18, position: "FW" }
+
+# MINNESOTA WILD (ID 304)
+- model: main.player
+  pk: 305
+  fields: { team: 304, name: "Filip Gustavsson", number: 32, position: "GK" }
+- model: main.player
+  pk: 306
+  fields: { team: 304, name: "Brock Faber", number: 7, position: "DF" }
+- model: main.player
+  pk: 307
+  fields: { team: 304, name: "Kirill Kaprizov", number: 97, position: "FW" }
+- model: main.player
+  pk: 308
+  fields: { team: 304, name: "Matt Boldy", number: 12, position: "FW" }
+
+# UTAH HOCKEY CLUB (ID 308)
+- model: main.player
+  pk: 309
+  fields: { team: 308, name: "Connor Ingram", number: 39, position: "GK" }
+- model: main.player
+  pk: 310
+  fields: { team: 308, name: "Sean Durzi", number: 50, position: "DF" }
+- model: main.player
+  pk: 311
+  fields: { team: 308, name: "Clayton Keller", number: 9, position: "FW" }
+- model: main.player
+  pk: 312
+  fields: { team: 308, name: "Dylan Guenther", number: 11, position: "FW" }
+
+# CHICAGO BLACKHAWKS (ID 301)
+- model: main.player
+  pk: 313
+  fields: { team: 301, name: "Petr Mrázek", number: 34, position: "GK" }
+- model: main.player
+  pk: 314
+  fields: { team: 301, name: "Seth Jones", number: 4, position: "DF" }
+- model: main.player
+  pk: 315
+  fields: { team: 301, name: "Connor Bedard", number: 98, position: "FW" }
+- model: main.player
+  pk: 316
+  fields: { team: 301, name: "Lukas Reichel", number: 15, position: "FW" }
+
+# ==========================================
+# NHL - PACIFIC DIVISION (401-408)
+# ==========================================
+
+# VANCOUVER CANUCKS (ID 407)
+- model: main.player
+  pk: 317
+  fields: { team: 407, name: "Thatcher Demko", number: 35, position: "GK" }
+- model: main.player
+  pk: 318
+  fields: { team: 407, name: "Quinn Hughes", number: 43, position: "DF" }
+- model: main.player
+  pk: 319
+  fields: { team: 407, name: "J.T. Miller", number: 9, position: "FW" }
+- model: main.player
+  pk: 320
+  fields: { team: 407, name: "Filip Hronek", number: 17, position: "DF" }
+
+# EDMONTON OILERS (ID 403)
+- model: main.player
+  pk: 321
+  fields: { team: 403, name: "Stuart Skinner", number: 72, position: "GK" }
+- model: main.player
+  pk: 322
+  fields: { team: 403, name: "Evan Bouchard", number: 2, position: "DF" }
+- model: main.player
+  pk: 323
+  fields: { team: 403, name: "Connor McDavid", number: 97, position: "FW" }
+- model: main.player
+  pk: 324
+  fields: { team: 403, name: "Leon Draisaitl", number: 29, position: "FW" }
+
+# VEGAS GOLDEN KNIGHTS (ID 408)
+- model: main.player
+  pk: 325
+  fields: { team: 408, name: "Logan Thompson", number: 36, position: "GK" }
+- model: main.player
+  pk: 326
+  fields: { team: 408, name: "Alex Pietrangelo", number: 7, position: "DF" }
+- model: main.player
+  pk: 327
+  fields: { team: 408, name: "Jack Eichel", number: 9, position: "FW" }
+- model: main.player
+  pk: 328
+  fields: { team: 408, name: "Tomáš Hertl", number: 48, position: "FW" }
+
+# LOS ANGELES KINGS (ID 404)
+- model: main.player
+  pk: 329
+  fields: { team: 404, name: "David Rittich", number: 31, position: "GK" }
+- model: main.player
+  pk: 330
+  fields: { team: 404, name: "Drew Doughty", number: 8, position: "DF" }
+- model: main.player
+  pk: 331
+  fields: { team: 404, name: "Anze Kopitar", number: 11, position: "FW" }
+- model: main.player
+  pk: 332
+  fields: { team: 404, name: "Adrian Kempe", number: 9, position: "FW" }
+
+# SEATTLE KRAKEN (ID 406)
+- model: main.player
+  pk: 333
+  fields: { team: 406, name: "Philipp Grubauer", number: 31, position: "GK" }
+- model: main.player
+  pk: 334
+  fields: { team: 406, name: "Vince Dunn", number: 29, position: "DF" }
+- model: main.player
+  pk: 335
+  fields: { team: 406, name: "Matty Beniers", number: 10, position: "FW" }
+- model: main.player
+  pk: 336
+  fields: { team: 406, name: "Jaden Schwartz", number: 17, position: "FW" }
+
+# CALGARY FLAMES (ID 402)
+- model: main.player
+  pk: 337
+  fields: { team: 402, name: "Dan Vladař", number: 80, position: "GK" }
+- model: main.player
+  pk: 338
+  fields: { team: 402, name: "Mikael Backlund", number: 11, position: "FW" }
+- model: main.player
+  pk: 339
+  fields: { team: 402, name: "Connor Zary", number: 47, position: "FW" }
+- model: main.player
+  pk: 340
+  fields: { team: 402, name: "Kevin Bahl", number: 62, position: "DF" }
+
+# ANAHEIM DUCKS (ID 401)
+- model: main.player
+  pk: 341
+  fields: { team: 401, name: "John Gibson", number: 36, position: "GK" }
+- model: main.player
+  pk: 342
+  fields: { team: 401, name: "Radko Gudas", number: 7, position: "DF" }
+- model: main.player
+  pk: 343
+  fields: { team: 401, name: "Troy Terry", number: 19, position: "FW" }
+- model: main.player
+  pk: 344
+  fields: { team: 401, name: "Trevor Zegras", number: 11, position: "FW" }
+
+# SAN JOSE SHARKS (ID 405)
+- model: main.player
+  pk: 345
+  fields: { team: 405, name: "Vitek Vanecek", number: 41, position: "GK" }
+- model: main.player
+  pk: 346
+  fields: { team: 405, name: "Macklin Celebrini", number: 71, position: "FW" }
+- model: main.player
+  pk: 347
+  fields: { team: 405, name: "William Eklund", number: 11, position: "FW" }
+- model: main.player
+  pk: 348
+  fields: { team: 405, name: "Cody Ceci", number: 5, position: "DF" }

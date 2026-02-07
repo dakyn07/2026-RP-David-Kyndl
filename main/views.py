@@ -50,11 +50,22 @@ def home(request):
     now = timezone.now()
     # Rozdělení na budoucí a minulé zápasy
     upcoming = Match.objects.filter(start_time__gte=now).order_by('start_time')
-    past = Match.objects.filter(start_time__lt=now).order_by('-start_time')
+    past = Match.objects.filter(start_time__lt=now).order_by('-start_time').prefetch_related('goals__player')
     
     return render(request, 'index.html', {
         'upcoming': upcoming,
         'past': past
+    })
+
+from django.shortcuts import render, get_object_or_404
+from .models import Match
+
+def match_detail(request, match_id):
+    # Jen vytáhneme data, nic neukládáme
+    match = get_object_or_404(Match.objects.prefetch_related('goals__player'), pk=match_id)
+    
+    return render(request, 'match_detail.html', {
+        'match': match,
     })
 
 # Tabulky lig
