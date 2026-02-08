@@ -1,75 +1,62 @@
 from django.contrib import admin
-from .models import Team, Player, Match, Goal
+from .models import Team, Player, Match, Goal, Card, Penalty
 
-class GoalInline(admin.TabularInline):
-    model = Goal
-    extra = 1
-
+class MatchEventMixin:
+    """Omezí výběr hráčů v adminu pouze na ty, kteří hrají daný zápas."""
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "player":
-            # Získání ID zápasu z URL (objekt, který právě měníme)
-            # Django admin používá v URL cestu /change/ID/
             object_id = request.resolver_match.kwargs.get('object_id')
-            
             if object_id:
-                # Najdeme aktuální zápas v databázi
-                match = Match.objects.get(pk=object_id)
-                # Vyfiltrujeme hráče, kteří patří buď do domácího, nebo hostujícího týmu
-                kwargs["queryset"] = Player.objects.filter(
-                    team__in=[match.home_team, match.away_team]
-                ).order_by('team', 'name')
-            else:
-                # Pokud vytváříme nový zápas, seznam hráčů bude prázdný (dokud zápas neuložíme)
-                kwargs["queryset"] = Player.objects.none()
-                
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
-    model = Goal
-    extra = 1
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "player":
-            # 1. Pokusíme se získat ID zápasu z URL (pro editaci existujícího)
-            resolved = request.resolver_match
-            match_id = resolved.kwargs.get('object_id')
-            
-            if match_id:
                 try:
-                    match_obj = Match.objects.get(pk=match_id)
-                    # Omezíme výběr na hráče domácího a hostujícího týmu
+                    match_obj = Match.objects.get(pk=object_id)
                     kwargs["queryset"] = Player.objects.filter(
                         team__in=[match_obj.home_team, match_obj.away_team]
-                    ).order_by('team__name', 'name')
+                    )
                 except Match.DoesNotExist:
                     pass
-            else:
-                # 2. Pokud ID v URL není (vytváříme nový zápas), 
-                # tak zatím zobrazíme prázdný seznam nebo nic, 
-                # protože týmy ještě nejsou vybrané a uložené.
-                kwargs["queryset"] = Player.objects.none()
-
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+class GoalInline(MatchEventMixin, admin.TabularInline):
+    model = Goal
+    extra = 1
+
+class CardInline(MatchEventMixin, admin.TabularInline):
+    model = Card
+    extra = 1
+
+class PenaltyInline(MatchEventMixin, admin.TabularInline):
+    model = Penalty
+    extra = 1
 
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):
-    list_display = ('id', 'home_team', 'away_team', 'home_score', 'away_score', 'status', 'start_time')
-    list_editable = ('home_score', 'away_score', 'status')
-    inlines = [GoalInline]
+    list_display = ('__str__', 'home_score', 'away_score', 'status', 'start_time')
+    list_filter = ('home_team__league', 'status')
     
-    # Tato drobnost vynutí, aby se Inline formuláře znovu načetly správně
-    def save_formset(self, request, form, formset, change):
-        formset.save()
+    def get_inline_instances(self, request, obj=None):
+        """Dynamicky vybere, které inliny se zobrazí podle ligy."""
+        inlines = [GoalInline] # Gól je v obou sportech
+        
+        if obj: # Pokud už zápas existuje
+            league = obj.home_team.league
+            if league == 'NHL':
+                inlines.append(PenaltyInline)
+            elif league == 'CHANCE':
+                inlines.append(CardInline)
+        else:
+            # Při vytváření nového zápasu (kdy ještě nevíme ligu) 
+            # můžeme zobrazit vše nebo nic. Zobrazíme raději vše:
+            inlines.extend([CardInline, PenaltyInline])
+            
+        return [inline(self.model, self.admin_site) for inline in inlines]
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'league', 'division')
-    ordering = ('pk',)
+    list_display = ('name', 'league', 'division')
+    list_filter = ('league',)
 
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ('name', 'number', 'team', 'position')
-    list_filter = ('team', 'position')
+    list_filter = ('team__league', 'team', 'position')
     search_fields = ('name',)
-
-@admin.register(Goal)
-class GoalAdmin(admin.ModelAdmin):
-    list_display = ('match', 'player')

@@ -24,7 +24,7 @@ class Player(models.Model):
     ])
 
     def __str__(self):
-        return f"{self.number}. {self.name}"
+        return f"{self.number}. {self.name} ({self.team.name})"
 
 class Match(models.Model):
     STATUS_CHOICES = [('PRE', 'Neproběhlo'), ('LIVE', 'Živě'), ('FIN', 'Ukončeno')]
@@ -36,11 +36,32 @@ class Match(models.Model):
     start_time = models.DateTimeField()
 
     def __str__(self):
-        return f"{self.home_team} vs {self.away_team}"
+        return f"{self.home_team.name} vs {self.away_team.name}"
 
 class Goal(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='goals')
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    minute = models.PositiveIntegerField(default=0)
+    is_penalty = models.BooleanField(default=False)
 
-    def __str__(self):
-        return f"{self.player.name} ({self.match})"
+    class Meta:
+        ordering = ['minute']
+
+class Card(models.Model):
+    CARD_TYPES = [('Y', 'Žlutá'), ('R', 'Červená')]
+    match = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='cards')
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    minute = models.PositiveIntegerField(default=0)
+    card_type = models.CharField(max_length=1, choices=CARD_TYPES)
+
+    class Meta:
+        ordering = ['minute']
+
+class Penalty(models.Model):
+    match = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='penalties')
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    minute = models.PositiveIntegerField(default=0)
+    duration = models.IntegerField(default=2) # např. 2, 5, 10 minut
+
+    class Meta:
+        ordering = ['minute']

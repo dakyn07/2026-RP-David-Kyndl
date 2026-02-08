@@ -13,6 +13,9 @@
             --accent: #00ff41;
             --text-main: #ffffff;
             --text-dim: #848d95;
+            --yellow-card: #ffcc00;
+            --red-card: #ff4141;
+            --penalty-blue: #4196ff;
         }
 
         body { 
@@ -30,38 +33,25 @@
 
         .ls-green { color: var(--accent); }
 
-        /* Zmenšený banner */
         .match-header-card {
             background: linear-gradient(180deg, var(--card-bg) 0%, #0d1117 100%);
             border-radius: 24px;
-            padding: 30px 20px; /* Výrazně zmenšený padding */
+            padding: 30px 20px;
             border: 1px solid rgba(255,255,255,0.05);
             margin-top: 1.5rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        /* Kompaktnější skóre */
         .score-huge {
-            font-size: 4rem; /* Zmenšeno z 6rem */
+            font-size: 4rem;
             font-weight: 800;
             color: var(--accent);
             line-height: 1;
             text-shadow: 0 0 20px rgba(0,255,65,0.15);
         }
 
-        /* Menší názvy týmů */
-        .team-title { 
-            font-weight: 700; 
-            font-size: 1.4rem; /* Zmenšeno z 2rem */
-            margin-top: 12px; 
-        }
-
-        /* Menší loga */
-        .team-logo-small {
-            height: 80px; /* Zmenšeno ze 150px */
-            width: auto;
-            object-fit: contain;
-        }
+        .team-title { font-weight: 700; font-size: 1.4rem; margin-top: 12px; }
+        .team-logo-small { height: 80px; width: auto; max-width: 100px; object-fit: contain; }
 
         .status-badge {
             background: rgba(255,255,255,0.05);
@@ -74,7 +64,8 @@
             color: var(--text-dim);
         }
 
-        .goal-list-container {
+        /* Timeline Styles */
+        .event-list-container {
             background: var(--card-bg);
             border-radius: 20px;
             padding: 25px;
@@ -100,30 +91,43 @@
             margin-left: 15px;
         }
 
-        .goal-row {
+        .event-row {
             display: flex;
             align-items: center;
             padding: 12px 18px;
             background: rgba(0,0,0,0.15);
             border-radius: 12px;
             margin-bottom: 8px;
-            border-left: 3px solid transparent;
             transition: all 0.2s ease;
         }
 
-        .goal-row:hover {
-            background: rgba(255,255,255,0.02);
-            border-left-color: var(--accent);
-            transform: translateX(5px);
-        }
-
-        .player-number {
+        .event-minute {
             font-weight: 800;
-            color: var(--accent);
-            margin-right: 12px;
-            width: 25px;
+            color: var(--text-dim);
+            width: 45px;
             font-size: 0.9rem;
         }
+
+        .event-icon {
+            width: 30px;
+            text-align: center;
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* Ikony událostí */
+        .icon-goal { color: var(--accent); }
+        .icon-penalty-box { color: var(--penalty-blue); }
+
+        .card-visual {
+            display: inline-block;
+            width: 12px;
+            height: 18px;
+            border-radius: 2px;
+            vertical-align: middle;
+        }
+        .bg-yellow { background-color: var(--yellow-card); box-shadow: 0 0 10px rgba(255,204,0,0.3); }
+        .bg-red { background-color: var(--red-card); box-shadow: 0 0 10px rgba(255,65,65,0.3); }
 
         .player-name { font-weight: 600; font-size: 1rem; }
         
@@ -144,8 +148,14 @@
             font-size: 0.9rem;
             transition: color 0.2s;
         }
-
         .back-link:hover { color: var(--accent); }
+
+        .penalty-time {
+            font-size: 0.75rem;
+            color: var(--penalty-blue);
+            font-weight: bold;
+            margin-left: 5px;
+        }
     </style>
 </head>
 <body>
@@ -185,18 +195,43 @@
         </div>
 
         <div class="row mt-4 justify-content-center">
-            <div class="col-lg-6"> <div class="goal-list-container">
-                    <h4 class="section-title">Střelci gólů</h4>
+            <div class="col-lg-7"> 
+                <div class="event-list-container">
+                    <h4 class="section-title">Průběh zápasu ({% if is_nhl %}Hokej{% else %}Fotbal{% endif %})</h4>
                     
-                    {% for goal in match.goals.all %}
-                        <div class="goal-row">
-                            <span class="player-number">#{{ goal.player.number }}</span>
-                            <span class="player-name">{{ goal.player.name }}</span>
-                            <span class="team-tag">{{ goal.player.team.name }}</span>
+                    {% for event in events %}
+                        <div class="event-row">
+                            <span class="event-minute">{{ event.minute }}'</span>
+                            
+                            <span class="event-icon">
+                                {% if event.type == 'goal' %}
+                                    <span class="icon-goal">{% if is_nhl %}🏒{% else %}⚽{% endif %}</span>
+                                {% elif event.type == 'card' %}
+                                    {% if event.data.card_type == 'Y' %}
+                                        <span class="card-visual bg-yellow"></span>
+                                    {% else %}
+                                        <span class="card-visual bg-red"></span>
+                                    {% endif %}
+                                {% elif event.type == 'penalty' %}
+                                    <span class="icon-penalty-box">⏱️</span>
+                                {% endif %}
+                            </span>
+
+                            <span class="player-name">
+                                {{ event.data.player.name }}
+                                {% if event.type == 'goal' and event.data.is_penalty %}
+                                    <small class="text-muted">({% if is_nhl %}TS{% else %}p{% endif %})</small>
+                                {% endif %}
+                                {% if event.type == 'penalty' %}
+                                    <span class="penalty-time">{{ event.data.duration }} min</span>
+                                {% endif %}
+                            </span>
+
+                            <span class="team-tag">{{ event.data.player.team.name }}</span>
                         </div>
                     {% empty %}
                         <div class="text-center py-3 text-muted small">
-                            V tomto zápase zatím nebyly zaznamenány žádné góly.
+                            Zatím nebyly zaznamenány žádné události.
                         </div>
                     {% endfor %}
                 </div>
@@ -204,7 +239,9 @@
         </div>
         
         <div class="text-center mt-4 mb-5">
-            <p class="small text-muted" style="font-size: 0.75rem;">Správa dat probíhá přes zabezpečené admin rozhraní.</p>
+            <p class="small text-muted" style="font-size: 0.75rem;">
+                Data jsou aktualizována v reálném čase. Sport: <strong>{% if is_nhl %}NHL / Hokej{% else %}Chance Liga / Fotbal{% endif %}</strong>
+            </p>
         </div>
     </div>
 
