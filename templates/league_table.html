@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -6,137 +7,7 @@
     <title>{{ league_name }} | Tabulka</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-dark: #0b0e11;      
-            --card-bg: #151921;      
-            --table-grey: #1e232b;   
-            --accent: #00ff41;       
-            --text-main: #ffffff;
-            --text-dim: #a0a6ac;
-        }
-
-        body { 
-            background-color: var(--bg-dark); 
-            color: var(--text-main); 
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding-bottom: 50px;
-        }
-
-        .navbar {
-            background: rgba(21, 25, 33, 0.9) !important;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 1.2rem 0;
-        }
-
-        .ls-green { color: var(--accent); font-weight: 800; }
-
-        .division-title {
-            color: var(--accent);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 1.2rem;
-            margin-top: 40px;
-            margin-bottom: 15px;
-            padding-left: 10px;
-            border-left: 4px solid var(--accent);
-        }
-
-        .table-container {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            margin-bottom: 30px;
-        }
-
-        .modern-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 8px; 
-        }
-
-        .modern-table thead th {
-            color: var(--text-dim);
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 0.1rem;
-            padding: 10px 20px;
-            border: none;
-        }
-
-        .modern-table tbody tr {
-            background-color: var(--table-grey);
-            transition: transform 0.2s, background-color 0.2s;
-        }
-
-        .modern-table tbody tr:hover {
-            background-color: #2d3440;
-            transform: scale(1.005);
-        }
-
-        .modern-table td {
-            padding: 15px 20px;
-            border: none;
-            color: var(--text-main);
-            vertical-align: middle;
-        }
-
-        .modern-table td:first-child { border-radius: 12px 0 0 12px; }
-        .modern-table td:last-child { border-radius: 0 12px 12px 0; }
-
-        .rank-number { font-weight: 800; color: var(--accent); font-size: 1.1rem; }
-        
-        .team-link { 
-            color: var(--text-main); 
-            text-decoration: none; 
-            font-weight: 700; 
-            font-size: 1rem;
-            white-space: nowrap;
-        }
-
-        .stats-cell {
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .points-pill {
-            background: rgba(0, 255, 65, 0.1);
-            color: var(--accent);
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-weight: 800;
-            border: 1px solid rgba(0, 255, 65, 0.2);
-            display: inline-block;
-        }
-
-        .btn-back {
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 10px 20px;
-            text-decoration: none;
-            transition: 0.3s;
-            font-size: 0.9rem;
-        }
-        .btn-back:hover { 
-            background: var(--accent); 
-            color: black; 
-            font-weight: bold;
-        }
-
-        @media (max-width: 576px) {
-            .modern-table td { padding: 12px 10px; }
-            .team-link { font-size: 0.9rem; }
-            .table-container { padding: 10px; }
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
@@ -161,7 +32,7 @@
             {% for div_name, div_data in divisions.items %}
                 <h2 class="division-title">{{ div_name }} divize</h2>
                 <div class="table-container">
-                    <div class="table-responsive" style="overflow-x: hidden;">
+                    <div class="table-responsive">
                         <table class="modern-table">
                             <thead>
                                 <tr>
@@ -180,17 +51,15 @@
                                         <div class="d-flex align-items-center">
                                             {% if row.team.logo_url %}
                                                 <img src="{{ row.team.logo_url }}" width="30" height="30" class="me-2 me-md-3" style="object-fit: contain;">
-                                            {% else %}
-                                                <div class="me-2 me-md-3 bg-dark rounded-circle" style="width: 30px; height: 30px; border: 1px solid rgba(255,255,255,0.1);"></div>
                                             {% endif %}
                                             <a href="{% url 'team_detail' row.team.pk %}" class="team-link">{{ row.team.name }}</a>
                                         </div>
                                     </td>
-                                    <td class="stats-cell text-white">{{ row.played }}</td>
-                                    <td class="stats-cell d-none d-md-table-cell" style="color: var(--text-dim);">
+                                    <td class="stats-cell text-white text-center">{{ row.played }}</td>
+                                    <td class="stats-cell d-none d-md-table-cell text-center" style="color: var(--text-dim);">
                                         {{ row.goals_scored }}:{{ row.goals_conceded }}
                                     </td>
-                                    <td class="stats-cell">
+                                    <td class="stats-cell text-center">
                                         <span class="points-pill">{{ row.points }} B</span>
                                     </td>
                                 </tr>
@@ -200,17 +69,15 @@
                     </div>
                 </div>
             {% endfor %}
-
         {% else %}
             <div class="table-container">
-                <div class="table-responsive" style="overflow-x: hidden;">
+                <div class="table-responsive">
                     <table class="modern-table">
                         <thead>
                             <tr>
                                 <th class="text-center" style="width: 50px;">#</th>
                                 <th>Tým</th>
                                 <th class="text-center">MP</th>
-                                <th class="text-center d-none d-md-table-cell">Skóre</th>
                                 <th class="text-center">Body</th>
                             </tr>
                         </thead>
@@ -222,23 +89,14 @@
                                     <div class="d-flex align-items-center">
                                         {% if row.team.logo_url %}
                                             <img src="{{ row.team.logo_url }}" width="30" height="30" class="me-2 me-md-3" style="object-fit: contain;">
-                                        {% else %}
-                                            <div class="me-2 me-md-3 bg-dark rounded-circle" style="width: 30px; height: 30px; border: 1px solid rgba(255,255,255,0.1);"></div>
                                         {% endif %}
                                         <a href="{% url 'team_detail' row.team.pk %}" class="team-link">{{ row.team.name }}</a>
                                     </div>
                                 </td>
-                                <td class="stats-cell text-white">{{ row.played }}</td>
-                                <td class="stats-cell d-none d-md-table-cell" style="color: var(--text-dim);">
-                                    {{ row.goals_scored }}:{{ row.goals_conceded }}
-                                </td>
-                                <td class="stats-cell">
+                                <td class="stats-cell text-white text-center">{{ row.played }}</td>
+                                <td class="stats-cell text-center">
                                     <span class="points-pill">{{ row.points }} B</span>
                                 </td>
-                            </tr>
-                            {% empty %}
-                            <tr>
-                                <td colspan="5" class="text-center py-5 text-dim">Žádná data nejsou k dispozici.</td>
                             </tr>
                             {% endfor %}
                         </tbody>

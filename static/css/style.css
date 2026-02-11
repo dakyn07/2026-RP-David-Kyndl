@@ -1,0 +1,417 @@
+/* --- ZÁKLADNÍ NASTAVENÍ (Proměnné z tvého kódu) --- */
+:root {
+    --bg-dark: #0b0e11;
+    --card-bg: #151921;
+    --accent: #00ff41;
+    --text-main: #ffffff;
+    --text-dim: #848d95;
+}
+
+body { 
+    background-color: var(--bg-dark); 
+    color: var(--text-main); 
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+/* --- OPRAVA POSUVNÍKU (Scrollbaru) --- */
+.table-container, .table-responsive {
+    -ms-overflow-style: none;  /* IE a Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+.table-container::-webkit-scrollbar, 
+.table-responsive::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari, Opera */
+}
+
+/* --- NAVBAR --- */
+.navbar {
+    background: rgba(21, 25, 33, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.2rem 0;
+}
+.navbar-brand { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: white; }
+.ls-green { color: var(--accent); }
+
+/* --- KARTA ZÁPASU (Klíč k tvému designu) --- */
+.card-match { 
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.card-match:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 255, 65, 0.3);
+}
+
+.team-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.team-name {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --- SKÓRE A ČAS --- */
+.score-display {
+    background: #000;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-weight: 800;
+    color: var(--accent);
+    font-size: 1.2rem;
+    min-width: 80px;
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.1);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.score-display:hover {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+}
+
+.time-badge {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.goal-scorers {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 12px;
+    font-style: italic;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 8px;
+}
+
+/* --- BOČNÍ PANEL (Soutěže) --- */
+.league-nav-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.league-nav-item:hover {
+    background: #1c222c;
+    color: var(--accent);
+    border-color: rgba(255,255,255,0.1);
+}
+
+.league-icon {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    overflow: hidden;
+}
+
+h4 { font-weight: 800; color: var(--text-dim); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.1rem; }
+
+/* --- TABULKY (League Table) --- */
+.table-container {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    margin-bottom: 30px;
+    overflow: hidden; /* Zabrání vyčnívání baru na okrajích */
+}
+
+.modern-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px; 
+}
+
+.modern-table thead th {
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.1rem;
+    padding: 10px 20px;
+    border: none;
+}
+
+.modern-table tbody tr {
+    background-color: #1e232b; /* --table-grey */
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.modern-table tbody tr:hover {
+    background-color: #2d3440;
+    transform: scale(1.005);
+}
+
+.modern-table td {
+    padding: 15px 20px;
+    border: none;
+    color: var(--text-main);
+    vertical-align: middle;
+}
+
+/* Zaoblení rohů pro každý řádek */
+.modern-table td:first-child { border-radius: 12px 0 0 12px; }
+.modern-table td:last-child { border-radius: 0 12px 12px 0; }
+
+.rank-number { font-weight: 800; color: var(--accent); font-size: 1.1rem; }
+
+.points-pill {
+    background: rgba(0, 255, 65, 0.1);
+    color: var(--accent);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 800;
+    border: 1px solid rgba(0, 255, 65, 0.2);
+    display: inline-block;
+}
+
+.division-title {
+    color: var(--accent);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    border-left: 4px solid var(--accent);
+}
+
+.btn-back {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 0.9rem;
+}
+.btn-back:hover { 
+    background: var(--accent); 
+    color: black; 
+    font-weight: bold;
+}
+
+/* --- DETAIL ZÁPASU (Match Detail) --- */
+.match-header-card {
+    background: linear-gradient(180deg, var(--card-bg) 0%, #0d1117 100%);
+    border-radius: 24px;
+    padding: 30px 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+    margin-top: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.score-huge {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(0,255,65,0.15);
+}
+
+.team-title { font-weight: 700; font-size: 1.4rem; margin-top: 12px; }
+.team-logo-small { height: 80px; width: auto; max-width: 100px; object-fit: contain; }
+
+.status-badge {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 5px 15px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+}
+
+/* Timeline / Události */
+.event-list-container {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+.section-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.section-title::after {
+    content: "";
+    height: 1px;
+    flex-grow: 1;
+    background: rgba(255,255,255,0.05);
+    margin-left: 15px;
+}
+
+.event-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 12px;
+    margin-bottom: 8px;
+}
+
+.event-minute {
+    font-weight: 800;
+    color: var(--text-dim);
+    width: 45px;
+    font-size: 0.9rem;
+}
+
+.icon-goal { color: var(--accent); }
+.icon-penalty-box { color: #4196ff; } /* --penalty-blue */
+
+.card-visual {
+    display: inline-block;
+    width: 12px;
+    height: 18px;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+.bg-yellow { background-color: #ffcc00; box-shadow: 0 0 10px rgba(255,204,0,0.3); }
+.bg-red { background-color: #ff4141; box-shadow: 0 0 10px rgba(255,65,65,0.3); }
+
+.team-tag {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 5px;
+    margin-left: auto;
+    color: var(--text-dim);
+}
+
+.back-link {
+    text-decoration: none;
+    color: var(--text-dim);
+    font-weight: 600;
+    transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+
+/* --- DETAIL TÝMU & SOUPISKA --- */
+.team-header-section {
+    text-align: center;
+    padding: 60px 0 40px 0;
+    background: linear-gradient(to bottom, rgba(0, 255, 65, 0.05), transparent);
+    margin-bottom: 30px;
+}
+
+.team-logo-lg {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 15px rgba(0,0,0,0.5));
+}
+
+.card-container {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    height: 100%;
+}
+
+.player-row {
+    background-color: #1e232b; /* --table-grey */
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid transparent;
+    transition: transform 0.2s;
+}
+
+.player-row:hover {
+    transform: translateX(5px);
+    background-color: #2d3440;
+}
+
+/* Pozice - barvy */
+.pos-GK { border-left-color: #ffc107; } /* Brankář */
+.pos-DF { border-left-color: #0d6efd; } /* Obránce */
+.pos-MD { border-left-color: #198754; } /* Záložník */
+.pos-FW { border-left-color: #dc3545; } /* Útočník */
+
+.player-number {
+    font-weight: 800;
+    color: var(--text-dim);
+    width: 35px;
+    display: inline-block;
+}
+
+.position-badge {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.05);
+    color: var(--text-dim);
+}
+
+.match-card {
+    background: #1e232b;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.match-score-pill {
+    background: #000;
+    color: var(--accent);
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-weight: 800;
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    min-width: 65px;
+    text-align: center;
+}
