@@ -3243,90 +3243,375 @@
   pk: 1269
   fields: { team: 11, name: "Vladimír Zeman", number: 13, position: "FW" }
 
-  # FK DUKLA PRAHA (ID 12)
+ # 1. FC SLOVÁCKO (Tým ID 12)
 - model: main.player
-  pk: 1270
-  fields: { team: 12, name: "Adam Jágrik", number: 31, position: "GK" }
+  pk: 1298
+  fields: { team: 12, name: "Milan Heča", number: 29, position: "GK" }
 - model: main.player
-  pk: 1271
-  fields: { team: 12, name: "Rihards Matrevics", number: 1, position: "GK" }
+  pk: 1299
+  fields: { team: 12, name: "Vlastimil Daníček", number: 28, position: "DF" }
 - model: main.player
-  pk: 1272
-  fields: { team: 12, name: "Dominik Hašek", number: 18, position: "DF" }
+  pk: 1300
+  fields: { team: 12, name: "Martin Koscelník", number: 7, position: "DF" }
 - model: main.player
-  pk: 1273
-  fields: { team: 12, name: "Eric Hunal", number: 4, position: "DF" }
+  pk: 1301
+  fields: { team: 12, name: "Jonathan Mulder", number: 18, position: "DF" }
 - model: main.player
-  pk: 1274
-  fields: { team: 12, name: "Jan Peterka", number: 7, position: "DF" }
+  pk: 1302
+  fields: { team: 12, name: "Gigli Ndefe", number: 2, position: "DF" }
 - model: main.player
-  pk: 1275
-  fields: { team: 12, name: "Marios Purzitidis", number: 37, position: "DF" }
+  pk: 1303
+  fields: { team: 12, name: "Petr Reinberk", number: 23, position: "DF" }
 - model: main.player
-  pk: 1276
-  fields: { team: 12, name: "Zlatan Šehović", number: 3, position: "DF" }
+  pk: 1304
+  fields: { team: 12, name: "Milan Rundič", number: 3, position: "DF" }
 - model: main.player
-  pk: 1277
-  fields: { team: 12, name: "Jaroslav Svozil", number: 23, position: "DF" }
+  pk: 1305
+  fields: { team: 12, name: "Andrej Stojčevski", number: 4, position: "DF" }
 - model: main.player
-  pk: 1278
-  fields: { team: 12, name: "Mouhamed Traore", number: 22, position: "DF" }
+  pk: 1306
+  fields: { team: 12, name: "Filip Vaško", number: 5, position: "DF" }
 - model: main.player
-  pk: 1279
-  fields: { team: 12, name: "Bruno Unušič", number: 28, position: "DF" }
+  pk: 1307
+  fields: { team: 12, name: "Daniel Barát", number: 14, position: "MD" }
 - model: main.player
-  pk: 1280
-  fields: { team: 12, name: "Martin Ambler", number: 12, position: "MD" }
+  pk: 1308
+  fields: { team: 12, name: "Patrik Blahút", number: 15, position: "MD" }
 - model: main.player
-  pk: 1281
-  fields: { team: 12, name: "Marcel Čermák", number: 19, position: "MD" }
+  pk: 1309
+  fields: { team: 12, name: "Paul Chiemela Ndubuisi", number: 25, position: "MD" }
 - model: main.player
-  pk: 1282
-  fields: { team: 12, name: "Michal Černák", number: 95, position: "MD" }
+  pk: 1310
+  fields: { team: 12, name: "Marek Havlík", number: 20, position: "MD" }
 - model: main.player
-  pk: 1283
-  fields: { team: 12, name: "Pavel Gaszczyk", number: 8, position: "MD" }
+  pk: 1311
+  fields: { team: 12, name: "Pavel Juroška", number: 24, position: "MD" }
 - model: main.player
-  pk: 1284
-  fields: { team: 12, name: "Dantaye Gilbert", number: 15, position: "MD" }
+  pk: 1312
+  fields: { team: 12, name: "Alan Marinelli", number: 9, position: "MD" }
 - model: main.player
-  pk: 1285
-  fields: { team: 12, name: "Marek Hanousek", number: 25, position: "MD" }
+  pk: 1313
+  fields: { team: 12, name: "Adonija Ouanda", number: 27, position: "MD" }
 - model: main.player
-  pk: 1286
-  fields: { team: 12, name: "Jakub Kadák", number: 26, position: "MD" }
+  pk: 1314
+  fields: { team: 12, name: "Milan Petržela", number: 11, position: "MD" }
 - model: main.player
-  pk: 1287
-  fields: { team: 12, name: "Daniel Kozma", number: 39, position: "MD" }
+  pk: 1315
+  fields: { team: 12, name: "Martin Šviderský", number: 6, position: "MD" }
 - model: main.player
-  pk: 1288
-  fields: { team: 12, name: "Dario Kreiker", number: 47, position: "MD" }
+  pk: 1316
+  fields: { team: 12, name: "Daniel Tetour", number: 8, position: "MD" }
 - model: main.player
-  pk: 1289
-  fields: { team: 12, name: "Lukáš Penxa", number: 6, position: "MD" }
+  pk: 1317
+  fields: { team: 12, name: "Michal Trávník", number: 10, position: "MD" }
 - model: main.player
-  pk: 1290
-  fields: { team: 12, name: "Samson Tijani", number: 14, position: "MD" }
+  pk: 1318
+  fields: { team: 12, name: "Ousman Ceesay", number: 13, position: "FW" }
 - model: main.player
-  pk: 1291
-  fields: { team: 12, name: "Diego Velasquez", number: 5, position: "MD" }
+  pk: 1319
+  fields: { team: 12, name: "Michael Krmenčík", number: 21, position: "FW" }
 - model: main.player
-  pk: 1292
-  fields: { team: 12, name: "Matěj Žitný", number: 20, position: "MD" }
-- model: main.player
-  pk: 1293
-  fields: { team: 12, name: "Namory Cissé", number: 27, position: "FW" }
-- model: main.player
-  pk: 1294
-  fields: { team: 12, name: "Boubou Diallo", number: 30, position: "FW" }
-- model: main.player
-  pk: 1295
-  fields: { team: 12, name: "Michal Kroupa", number: 9, position: "FW" }
-- model: main.player
-  pk: 1296
-  fields: { team: 12, name: "Kevin-Prince Milla", number: 11, position: "FW" }
-- model: main.player
-  pk: 1297
-  fields: { team: 12, name: "Tomáš Pekhart", number: 17, position: "FW" }
+  pk: 1320
+  fields: { team: 12, name: "Žan Medved", number: 55, position: "FW" }
 
-  
+# KARVINÁ (Tým ID 13)
+- model: main.player
+  pk: 1321
+  fields: { team: 13, name: "Jakub Lapeš", number: 30, position: "GK" }
+- model: main.player
+  pk: 1322
+  fields: { team: 13, name: "Vladimír Neuman", number: 1, position: "GK" }
+- model: main.player
+  pk: 1323
+  fields: { team: 13, name: "Sahmkou Camara", number: 49, position: "DF" }
+- model: main.player
+  pk: 1324
+  fields: { team: 13, name: "Jan Chytrý", number: 24, position: "DF" }
+- model: main.player
+  pk: 1325
+  fields: { team: 13, name: "Jiří Fleišman", number: 25, position: "DF" }
+- model: main.player
+  pk: 1326
+  fields: { team: 13, name: "Nino Milič", number: 19, position: "DF" }
+- model: main.player
+  pk: 1327
+  fields: { team: 13, name: "Filip Prebsl", number: 99, position: "DF" }
+- model: main.player
+  pk: 1328
+  fields: { team: 13, name: "Aboubacar Traoré", number: 4, position: "DF" }
+- model: main.player
+  pk: 1329
+  fields: { team: 13, name: "Kristián Vallo", number: 7, position: "DF" }
+- model: main.player
+  pk: 1330
+  fields: { team: 13, name: "Emmanuel Ayaosi", number: 14, position: "MD" }
+- model: main.player
+  pk: 1331
+  fields: { team: 13, name: "Sebastian Boháč", number: 36, position: "MD" }
+- model: main.player
+  pk: 1332
+  fields: { team: 13, name: "Ousmane Condé", number: 31, position: "MD" }
+- model: main.player
+  pk: 1333
+  fields: { team: 13, name: "Pavel Kačor", number: 11, position: "MD" }
+- model: main.player
+  pk: 1334
+  fields: { team: 13, name: "Jakub Křišťan", number: 8, position: "MD" }
+- model: main.player
+  pk: 1335
+  fields: { team: 13, name: "Albert Labík", number: 9, position: "MD" }
+- model: main.player
+  pk: 1336
+  fields: { team: 13, name: "Denny Samko", number: 10, position: "MD" }
+- model: main.player
+  pk: 1337
+  fields: { team: 13, name: "Samuel Šigut", number: 17, position: "MD" }
+- model: main.player
+  pk: 1338
+  fields: { team: 13, name: "Rok Štorman", number: 77, position: "MD" }
+- model: main.player
+  pk: 1339
+  fields: { team: 13, name: "Vít Valošek", number: 28, position: "MD" }
+- model: main.player
+  pk: 1340
+  fields: { team: 13, name: "Lucky Ezeh", number: 26, position: "FW" }
+- model: main.player
+  pk: 1341
+  fields: { team: 13, name: "Jan Fiala", number: 29, position: "FW" }
+- model: main.player
+  pk: 1342
+  fields: { team: 13, name: "Ebrima Singhateh", number: 27, position: "FW" }
+- model: main.player
+  pk: 1343
+  fields: { team: 13, name: "Kahuan Vinicius", number: 20, position: "FW" }
+
+  # PARDUBICE (Tým ID 14)
+- model: main.player
+  pk: 1344
+  fields: { team: 14, name: "Luka Charatišvili", number: 99, position: "GK" }
+- model: main.player
+  pk: 1345
+  fields: { team: 14, name: "Aleš Mandous", number: 30, position: "GK" }
+- model: main.player
+  pk: 1346
+  fields: { team: 14, name: "Jan Stejskal", number: 13, position: "GK" }
+- model: main.player
+  pk: 1347
+  fields: { team: 14, name: "Simon Bammens", number: 44, position: "DF" }
+- model: main.player
+  pk: 1348
+  fields: { team: 14, name: "Emmanuel Godwin", number: 15, position: "DF" }
+- model: main.player
+  pk: 1349
+  fields: { team: 14, name: "Jiří Hamza", number: 5, position: "DF" }
+- model: main.player
+  pk: 1350
+  fields: { team: 14, name: "Mikuláš Konečný", number: 32, position: "DF" }
+- model: main.player
+  pk: 1351
+  fields: { team: 14, name: "Louis Lurvink", number: 43, position: "DF" }
+- model: main.player
+  pk: 1352
+  fields: { team: 14, name: "Ryan Mahuta", number: 25, position: "DF" }
+- model: main.player
+  pk: 1353
+  fields: { team: 14, name: "Jason Noslin", number: 43, position: "DF" }
+- model: main.player
+  pk: 1354
+  fields: { team: 14, name: "Jan Trédl", number: 12, position: "DF" }
+- model: main.player
+  pk: 1355
+  fields: { team: 14, name: "Giannis-Fivos Botos", number: 90, position: "MD" }
+- model: main.player
+  pk: 1356
+  fields: { team: 14, name: "Michal Hlavatý", number: 19, position: "MD" }
+- model: main.player
+  pk: 1357
+  fields: { team: 14, name: "Tomáš Jelínek", number: 16, position: "MD" }
+- model: main.player
+  pk: 1358
+  fields: { team: 14, name: "Štěpán Míšek", number: 18, position: "MD" }
+- model: main.player
+  pk: 1359
+  fields: { team: 14, name: "Jan Řezníček", number: 6, position: "MD" }
+- model: main.player
+  pk: 1360
+  fields: { team: 14, name: "Robi Saarma", number: 77, position: "MD" }
+- model: main.player
+  pk: 1361
+  fields: { team: 14, name: "Samuel Šimek", number: 26, position: "MD" }
+- model: main.player
+  pk: 1362
+  fields: { team: 14, name: "Tomáš Solil", number: 24, position: "MD" }
+- model: main.player
+  pk: 1363
+  fields: { team: 14, name: "Kamil Vacek", number: 7, position: "MD" }
+- model: main.player
+  pk: 1364
+  fields: { team: 14, name: "Ladislav Krobot", number: 17, position: "FW" }
+- model: main.player
+  pk: 1365
+  fields: { team: 14, name: "Vojtěch Patrák", number: 8, position: "FW" }
+- model: main.player
+  pk: 1366
+  fields: { team: 14, name: "Elem Victor Samuel", number: 35, position: "FW" }
+- model: main.player
+  pk: 1367
+  fields: { team: 14, name: "Daniel Smékal", number: 19, position: "FW" }
+- model: main.player
+  pk: 1368
+  fields: { team: 14, name: "Abdullahi Tanko", number: 28, position: "FW" }
+- model: main.player
+  pk: 1369
+  fields: { team: 14, name: "Filip Vecheta", number: 10, position: "FW" }
+
+  # FK DUKLA PRAHA (ID 15)
+- model: main.player
+  pk: 1370
+  fields: { team: 15, name: "Adam Jágrik", number: 31, position: "GK" }
+- model: main.player
+  pk: 1371
+  fields: { team: 15, name: "Rihards Matrevics", number: 1, position: "GK" }
+- model: main.player
+  pk: 1372
+  fields: { team: 15, name: "Dominik Hašek", number: 18, position: "DF" }
+- model: main.player
+  pk: 1373
+  fields: { team: 15, name: "Eric Hunal", number: 4, position: "DF" }
+- model: main.player
+  pk: 1374
+  fields: { team: 15, name: "Jan Peterka", number: 7, position: "DF" }
+- model: main.player
+  pk: 1375
+  fields: { team: 15, name: "Marios Purzitidis", number: 37, position: "DF" }
+- model: main.player
+  pk: 1376
+  fields: { team: 15, name: "Zlatan Šehović", number: 3, position: "DF" }
+- model: main.player
+  pk: 1377
+  fields: { team: 15, name: "Jaroslav Svozil", number: 23, position: "DF" }
+- model: main.player
+  pk: 1378
+  fields: { team: 15, name: "Mouhamed Traore", number: 22, position: "DF" }
+- model: main.player
+  pk: 1379
+  fields: { team: 15, name: "Bruno Unušič", number: 28, position: "DF" }
+- model: main.player
+  pk: 1380
+  fields: { team: 15, name: "Martin Ambler", number: 12, position: "MD" }
+- model: main.player
+  pk: 1381
+  fields: { team: 15, name: "Marcel Čermák", number: 19, position: "MD" }
+- model: main.player
+  pk: 1382
+  fields: { team: 15, name: "Michal Černák", number: 95, position: "MD" }
+- model: main.player
+  pk: 1383
+  fields: { team: 15, name: "Pavel Gaszczyk", number: 8, position: "MD" }
+- model: main.player
+  pk: 1384
+  fields: { team: 15, name: "Dantaye Gilbert", number: 15, position: "MD" }
+- model: main.player
+  pk: 1385
+  fields: { team: 15, name: "Marek Hanousek", number: 25, position: "MD" }
+- model: main.player
+  pk: 1386
+  fields: { team: 15, name: "Jakub Kadák", number: 26, position: "MD" }
+- model: main.player
+  pk: 1387
+  fields: { team: 15, name: "Daniel Kozma", number: 39, position: "MD" }
+- model: main.player
+  pk: 1388
+  fields: { team: 15, name: "Dario Kreiker", number: 47, position: "MD" }
+- model: main.player
+  pk: 1389
+  fields: { team: 15, name: "Lukáš Penxa", number: 6, position: "MD" }
+- model: main.player
+  pk: 1390
+  fields: { team: 15, name: "Samson Tijani", number: 14, position: "MD" }
+- model: main.player
+  pk: 1391
+  fields: { team: 15, name: "Diego Velasquez", number: 5, position: "MD" }
+- model: main.player
+  pk: 1392
+  fields: { team: 15, name: "Matěj Žitný", number: 20, position: "MD" }
+- model: main.player
+  pk: 1393
+  fields: { team: 15, name: "Namory Cissé", number: 27, position: "FW" }
+- model: main.player
+  pk: 1394
+  fields: { team: 15, name: "Boubou Diallo", number: 30, position: "FW" }
+- model: main.player
+  pk: 1395
+  fields: { team: 15, name: "Michal Kroupa", number: 9, position: "FW" }
+- model: main.player
+  pk: 1396
+  fields: { team: 15, name: "Kevin-Prince Milla", number: 11, position: "FW" }
+- model: main.player
+  pk: 1397
+  fields: { team: 15, name: "Tomáš Pekhart", number: 17, position: "FW" }
+
+  # FC ZLÍN (Tým ID 16)
+- model: main.player
+  pk: 1398
+  fields: { team: 16, name: "Stanislav Dostál", number: 17, position: "GK" }
+- model: main.player
+  pk: 1399
+  fields: { team: 16, name: "Lukáš Bartošák", number: 31, position: "DF" }
+- model: main.player
+  pk: 1400
+  fields: { team: 16, name: "Jakub Černín", number: 24, position: "DF" }
+- model: main.player
+  pk: 1401
+  fields: { team: 16, name: "Michal Fukala", number: 22, position: "DF" }
+- model: main.player
+  pk: 1402
+  fields: { team: 16, name: "Jakub Jugas", number: 25, position: "DF" }
+- model: main.player
+  pk: 1403
+  fields: { team: 16, name: "Jan Kalabiška", number: 91, position: "DF" }
+- model: main.player
+  pk: 1404
+  fields: { team: 16, name: "Jakub Kolář", number: 28, position: "DF" }
+- model: main.player
+  pk: 1405
+  fields: { team: 16, name: "Miloš Kopečný", number: 23, position: "DF" }
+- model: main.player
+  pk: 1406
+  fields: { team: 16, name: "Antonín Křapka", number: 39, position: "DF" }
+- model: main.player
+  pk: 1407
+  fields: { team: 16, name: "Michal Cupák", number: 26, position: "MD" }
+- model: main.player
+  pk: 1408
+  fields: { team: 16, name: "Joss Didiba", number: 6, position: "MD" }
+- model: main.player
+  pk: 1409
+  fields: { team: 16, name: "Tomáš Hellebrand", number: 53, position: "MD" }
+- model: main.player
+  pk: 1410
+  fields: { team: 16, name: "David Machalík", number: 8, position: "MD" }
+- model: main.player
+  pk: 1411
+  fields: { team: 16, name: "Cletus Nombil", number: 19, position: "MD" }
+- model: main.player
+  pk: 1412
+  fields: { team: 16, name: "Stanislav Petruta", number: 16, position: "MD" }
+- model: main.player
+  pk: 1413
+  fields: { team: 16, name: "Marián Pišoja", number: 82, position: "MD" }
+- model: main.player
+  pk: 1414
+  fields: { team: 16, name: "Tom Ulbrich", number: 4, position: "MD" }
+- model: main.player
+  pk: 1415
+  fields: { team: 16, name: "Lukáš Bránecký", number: 30, position: "FW" }
+- model: main.player
+  pk: 1416
+  fields: { team: 16, name: "Stanley Kanu", number: 14, position: "FW" }
+- model: main.player
+  pk: 1417
+  fields: { team: 16, name: "Matěj Koubek", number: 15, position: "FW" }
+- model: main.player
+  pk: 1418
+  fields: { team: 16, name: "Tomáš Poznar", number: 88, position: "FW" }
