@@ -50,14 +50,14 @@
                 {% if match.status == 'LIVE' %}
                     <div class="live-timer-big">
                         <span class="pulse-dot"></span>
-                        <span id="big-timer" 
-                              data-start="{{ last_start_iso }}" 
-                              data-elapsed="{{ match.current_elapsed_seconds }}">
+                        <span id="big-timer" data-start="{{ last_start_iso }}">
                             {{ current_minute }}'
                         </span>
                     </div>
                 {% else %}
-                    {{ match.get_status_display }} • {{ match.start_time|date:"d. m. Y H:i" }}
+                    <span class="badge {% if match.status == 'FIN' %}bg-secondary{% else %}bg-primary{% endif %} p-2">
+                        {{ match.get_status_display }} • {{ match.start_time|date:"d. m. Y H:i" }}
+                    </span>
                 {% endif %}
             </div>
             
@@ -129,44 +129,36 @@
 
     <script>
     /**
-     * Hlavní funkce pro výpočet a zobrazení času
+     * Automatický přepočet minuty na frontendu
      */
     function updateBigTimer() {
         const timerElement = document.getElementById('big-timer');
-        
-        // Pokud element na stránce není (zápas neběží), nic neděláme
         if (!timerElement) return;
 
         const startTimeStr = timerElement.dataset.start;
-        const elapsedBefore = parseInt(timerElement.dataset.elapsed) || 0;
 
         if (startTimeStr) {
             const startTime = new Date(startTimeStr);
             const now = new Date();
             
-            // Výpočet rozdílu v sekundách
+            // Rozdíl v sekundách od startu zápasu
             const diffInSeconds = Math.floor((now - startTime) / 1000);
             
-            // Celkový čas (předchozí části + aktuální čas)
-            const totalSeconds = elapsedBefore + diffInSeconds;
-            
-            // Převod na minuty (0-59s = 1. minuta)
-            const currentMinute = Math.floor(totalSeconds / 60) + 1;
+            // 0-59s = 1. minuta, proto +1. Pokud je čas v budoucnu, ukážeme 1'
+            let currentMinute = Math.floor(diffInSeconds / 60) + 1;
+            if (currentMinute < 1) currentMinute = 1;
             
             timerElement.innerText = currentMinute + "'";
         }
     }
 
-    // Spustíme interval, pouze pokud je zápas ve stavu LIVE
-    // Použijeme uvozovky kolem Django tagu, aby to editor nebral jako chybu v JS
     const matchStatus = "{{ match.status }}";
 
     if (matchStatus === 'LIVE') {
-        // Spustíme hned po načtení
         updateBigTimer();
-        // A pak každou sekundu
-        setInterval(updateBigTimer, 1000);
+        // Stačí aktualizovat každých 10 sekund (šetří výkon, vteřiny neukazujeme)
+        setInterval(updateBigTimer, 10000);
     }
-</script>
+    </script>
 </body>
 </html>

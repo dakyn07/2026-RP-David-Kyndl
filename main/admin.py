@@ -37,63 +37,34 @@ class PenaltyInline(MatchEventMixin, admin.TabularInline):
 
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):
-    # Přidali jsme sloupce pro stav běhu a aktuální minutu
-    list_display = ('__str__', 'home_score', 'away_score', 'status', 'is_running', 'display_minute', 'start_time')
-    list_filter = ('home_team__league', 'status', 'is_running')
+    # Odstraněno is_running a přidáno list_editable pro rychlé změny
+    list_display = ('__str__', 'home_score', 'away_score', 'status', 'display_minute', 'start_time')
+    list_editable = ('home_score', 'away_score', 'status')
+    list_filter = ('home_team__league', 'status')
     
-    # Definice tlačítek v menu "Akce"
-    actions = ['start_timer', 'pause_timer', 'finish_match']
+    # Ponechali jsme jen akci pro ruční ukončení (pokud by automat selhal)
+    actions = ['force_finish_match']
 
     def display_minute(self, obj):
         """Zobrazí minutu přímo v seznamu zápasů"""
         return f"{obj.current_minute}'"
-    display_minute.short_description = "Aktuální minuta"
+    display_minute.short_description = "Minuta"
 
-    @admin.action(description="▶ Spustit / Pokračovat v čase")
-    def start_timer(self, request, queryset):
-        for match in queryset:
-            if not match.is_running:
-                match.status = 'LIVE'
-                match.last_start_time = timezone.now()
-                match.is_running = True
-                match.save()
-        self.message_user(request, "Časomíra byla spuštěna.", messages.SUCCESS)
-
-    @admin.action(description="⏸ Pozastavit čas (Pauza / Konec třetiny)")
-    def pause_timer(self, request, queryset):
-        for match in queryset:
-            if match.is_running:
-                now = timezone.now()
-                # Spočítáme, kolik uběhlo od posledního kliku na START
-                diff = (now - match.last_start_time).total_seconds()
-                # Přičteme to k celkovému času zápasu
-                match.current_elapsed_seconds += int(diff)
-                match.is_running = False
-                match.save()
-        self.message_user(request, "Časomíra byla pozastavena.", messages.WARNING)
-
-    @admin.action(description="🏁 Ukončit zápas (FIN)")
-    def finish_match(self, request, queryset):
-        for match in queryset:
-            if match.is_running:
-                now = timezone.now()
-                diff = (now - match.last_start_time).total_seconds()
-                match.current_elapsed_seconds += int(diff)
-            
-            match.is_running = False
-            match.status = 'FIN'
-            match.save()
-        self.message_user(request, "Zápas byl označen jako ukončený.", messages.INFO)
+    @admin.action(description="🏁 Označit jako ukončené")
+    def force_finish_match(self, request, queryset):
+        queryset.update(status='FIN')
+        self.message_user(request, "Vybrané zápasy byly ukončeny.", messages.INFO)
 
     def get_inline_instances(self, request, obj=None):
-        """Dynamicky vybere, které inliny se zobrazí podle ligy (Hokej vs Fotbal)."""
+        """Dynamicky vybere, které inliny se zobrazí podle ligy (NHL = hokej, Chance = hokej/fotbal)."""
         inlines = [GoalInline]
         
         if obj:
-            league = obj.home_team.league
+            league = obj.home_team.league.upper()
+            # NHL má tresty, ostatní (včetně Chance, pokud ji hraješ jako fotbal) mají karty
             if league == 'NHL':
                 inlines.append(PenaltyInline)
-            elif league == 'CHANCE':
+            else:
                 inlines.append(CardInline)
         else:
             # Při vytváření nového zápasu zobrazíme vše
@@ -106,10 +77,16 @@ class MatchAdmin(admin.ModelAdmin):
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('name', 'league', 'division')
-    list_filter = ('league',)
+    list_filter = ('league', 'division')
+    search_fields = ('name',)
 
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ('name', 'number', 'team', 'position')
     list_filter = ('team__league', 'team', 'position')
     search_fields = ('name',)
+
+# Registrace modelů pro samostatné úpravy
+admin.site.register(Goal)
+admin.site.register(Card)
+admin.site.register(Penalty)

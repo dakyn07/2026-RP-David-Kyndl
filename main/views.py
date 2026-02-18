@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.db.models import Q, Case, When, IntegerField
 
 def get_table_data(league_code, division_code=None):
+    """Pomocná funkce pro výpočet tabulky."""
     win_points = 2 if league_code.upper() == 'NHL' else 3
     
     teams = Team.objects.filter(league=league_code)
@@ -32,10 +33,34 @@ def get_table_data(league_code, division_code=None):
     return sorted(table, key=lambda x: (x['points'], x['goals_scored'] - x['goals_conceded']), reverse=True)
 
 def home(request):
+    """Hlavní stránka s přehledem zápasů."""
     now = timezone.now()
+    
+    # Automatické přepínání LIVE -> FIN
+    live_checks = Match.objects.filter(status='LIVE')
+    for m in live_checks:
+        diff_minutes = (now - m.start_time).total_seconds() / 60
+        is_hockey = m.home_team.league in ['NHL', 'CHANCE']
+        # Hokej končí v reálu cca po 125 minutách (pauzy), fotbal cca po 110
+        limit = 125 if is_hockey else 110
+        
+        if diff_minutes >= limit:
+            m.status = 'FIN'
+            m.save()
+
+    # Živé zápasy (všechny aktuální)
     live_matches = Match.objects.filter(status='LIVE').order_by('start_time')
-    upcoming = Match.objects.filter(status='PRE', start_time__gte=now).order_by('start_time')
-    past = Match.objects.filter(status='FIN').order_by('-start_time').prefetch_related('goals__player')
+    
+    # LIMIT: Jen 5 nejbližších budoucích zápasů
+    upcoming = Match.objects.filter(
+        status='PRE', 
+        start_time__gte=now
+    ).order_by('start_time')[:5]
+    
+    # LIMIT: Jen 5 posledních odehraných zápasů
+    past = Match.objects.filter(
+        status='FIN'
+    ).order_by('-start_time').prefetch_related('goals__player')[:5]
     
     return render(request, 'index.html', {
         'live_matches': live_matches,
@@ -44,6 +69,7 @@ def home(request):
     })
 
 def match_detail(request, match_id):
+    """Detail konkrétního zápasu."""
     match = get_object_or_404(
         Match.objects.prefetch_related('goals__player', 'cards__player', 'penalties__player'), 
         pk=match_id
@@ -64,16 +90,12 @@ def match_detail(request, match_id):
     
     events.sort(key=lambda x: x['minute'])
 
-    last_start_iso = ""
-    if match.last_start_time:
-        last_start_iso = match.last_start_time.isoformat()
-    
     return render(request, 'match_detail.html', {
         'match': match,
         'events': events,
         'is_nhl': is_nhl,
         'current_minute': match.current_minute,
-        'last_start_iso': last_start_iso
+        'last_start_iso': match.start_time.isoformat() if match.start_time else ""
     })
 
 def league_view(request, league_code):
