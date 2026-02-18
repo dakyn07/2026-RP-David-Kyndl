@@ -8,6 +8,32 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .live-timer-big {
+            font-weight: 800;
+            color: #ff4d4d;
+            background: rgba(255, 77, 77, 0.1);
+            padding: 5px 15px;
+            border-radius: 50px;
+            display: inline-block;
+            border: 1px solid rgba(255, 77, 77, 0.3);
+            margin-bottom: 10px;
+        }
+        .pulse-dot {
+            height: 10px;
+            width: 10px;
+            background-color: #ff4d4d;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 1; }
+            70% { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(0.95); opacity: 0; }
+        }
+    </style>
 </head>
 <body>
 
@@ -21,7 +47,18 @@
     <div class="container">
         <div class="match-header-card text-center">
             <div class="status-badge mb-3">
-                {{ match.get_status_display }} • {{ match.start_time|date:"d. m. Y H:i" }}
+                {% if match.status == 'LIVE' %}
+                    <div class="live-timer-big">
+                        <span class="pulse-dot"></span>
+                        <span id="big-timer" 
+                              data-start="{{ last_start_iso }}" 
+                              data-elapsed="{{ match.current_elapsed_seconds }}">
+                            {{ current_minute }}'
+                        </span>
+                    </div>
+                {% else %}
+                    {{ match.get_status_display }} • {{ match.start_time|date:"d. m. Y H:i" }}
+                {% endif %}
             </div>
             
             <div class="row align-items-center">
@@ -90,5 +127,46 @@
         </div>
     </div>
 
+    <script>
+    /**
+     * Hlavní funkce pro výpočet a zobrazení času
+     */
+    function updateBigTimer() {
+        const timerElement = document.getElementById('big-timer');
+        
+        // Pokud element na stránce není (zápas neběží), nic neděláme
+        if (!timerElement) return;
+
+        const startTimeStr = timerElement.dataset.start;
+        const elapsedBefore = parseInt(timerElement.dataset.elapsed) || 0;
+
+        if (startTimeStr) {
+            const startTime = new Date(startTimeStr);
+            const now = new Date();
+            
+            // Výpočet rozdílu v sekundách
+            const diffInSeconds = Math.floor((now - startTime) / 1000);
+            
+            // Celkový čas (předchozí části + aktuální čas)
+            const totalSeconds = elapsedBefore + diffInSeconds;
+            
+            // Převod na minuty (0-59s = 1. minuta)
+            const currentMinute = Math.floor(totalSeconds / 60) + 1;
+            
+            timerElement.innerText = currentMinute + "'";
+        }
+    }
+
+    // Spustíme interval, pouze pokud je zápas ve stavu LIVE
+    // Použijeme uvozovky kolem Django tagu, aby to editor nebral jako chybu v JS
+    const matchStatus = "{{ match.status }}";
+
+    if (matchStatus === 'LIVE') {
+        // Spustíme hned po načtení
+        updateBigTimer();
+        // A pak každou sekundu
+        setInterval(updateBigTimer, 1000);
+    }
+</script>
 </body>
 </html>

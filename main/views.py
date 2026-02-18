@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.db.models import Q, Case, When, IntegerField
 
 def get_table_data(league_code, division_code=None):
-    # NHL má 2 body za výhru, Chance (fotbal) má 3 body
     win_points = 2 if league_code.upper() == 'NHL' else 3
     
     teams = Team.objects.filter(league=league_code)
@@ -34,9 +33,15 @@ def get_table_data(league_code, division_code=None):
 
 def home(request):
     now = timezone.now()
-    upcoming = Match.objects.filter(start_time__gte=now).order_by('start_time')
-    past = Match.objects.filter(start_time__lt=now).order_by('-start_time').prefetch_related('goals__player')
-    return render(request, 'index.html', {'upcoming': upcoming, 'past': past})
+    live_matches = Match.objects.filter(status='LIVE').order_by('start_time')
+    upcoming = Match.objects.filter(status='PRE', start_time__gte=now).order_by('start_time')
+    past = Match.objects.filter(status='FIN').order_by('-start_time').prefetch_related('goals__player')
+    
+    return render(request, 'index.html', {
+        'live_matches': live_matches,
+        'upcoming': upcoming, 
+        'past': past
+    })
 
 def match_detail(request, match_id):
     match = get_object_or_404(
@@ -47,11 +52,9 @@ def match_detail(request, match_id):
     is_nhl = match.home_team.league == 'NHL'
     events = []
 
-    # Góly
     for goal in match.goals.all():
         events.append({'type': 'goal', 'data': goal, 'minute': goal.minute})
     
-    # Rozlišení karet a trestů
     if is_nhl:
         for p in match.penalties.all():
             events.append({'type': 'penalty', 'data': p, 'minute': p.minute})
@@ -60,11 +63,17 @@ def match_detail(request, match_id):
             events.append({'type': 'card', 'data': c, 'minute': c.minute})
     
     events.sort(key=lambda x: x['minute'])
+
+    last_start_iso = ""
+    if match.last_start_time:
+        last_start_iso = match.last_start_time.isoformat()
     
     return render(request, 'match_detail.html', {
         'match': match,
         'events': events,
-        'is_nhl': is_nhl
+        'is_nhl': is_nhl,
+        'current_minute': match.current_minute,
+        'last_start_iso': last_start_iso
     })
 
 def league_view(request, league_code):
@@ -84,7 +93,13 @@ def league_view(request, league_code):
 def team_detail(request, team_id):
     team = get_object_or_404(Team, pk=team_id)
     players = team.players.all().annotate(
-        position_order=Case(When(position='GK', then=1), When(position='DF', then=2), When(position='MD', then=3), When(position='FW', then=4), output_field=IntegerField())
+        position_order=Case(
+            When(position='GK', then=1), 
+            When(position='DF', then=2), 
+            When(position='MD', then=3), 
+            When(position='FW', then=4), 
+            output_field=IntegerField()
+        )
     ).order_by('position_order', 'number')
     past_matches = Match.objects.filter(Q(home_team=team) | Q(away_team=team), status='FIN').order_by('-start_time')[:5]
     return render(request, 'team_detail.html', {'team': team, 'players': players, 'past_matches': past_matches})

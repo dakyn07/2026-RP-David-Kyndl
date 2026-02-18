@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Team(models.Model):
     LEAGUE_CHOICES = [('CHANCE', 'Chance Liga'), ('NHL', 'NHL')]
@@ -35,9 +36,35 @@ class Match(models.Model):
     status = models.CharField(max_length=4, choices=STATUS_CHOICES, default='PRE')
     start_time = models.DateTimeField()
 
+    # Pole pro případné ruční zastavování (ponecháme pro strýčka Příhodu)
+    is_running = models.BooleanField(default=False)
+    current_elapsed_seconds = models.PositiveIntegerField(default=0)
+    last_start_time = models.DateTimeField(null=True, blank=True)
+
     def __str__(self):
         return f"{self.home_team.name} vs {self.away_team.name}"
 
+    @property
+    def start_time_iso(self):
+        """Vrátí plánovaný start v ISO formátu pro JS."""
+        return self.start_time.isoformat()
+
+    @property
+    def current_minute(self):
+        """Vypočítá minutu na základě reálného času od start_time."""
+        if self.status == 'LIVE':
+            now = timezone.now()
+            if now > self.start_time:
+                diff = now - self.start_time
+                # 0-59s = 1. minuta, proto +1
+                return int(diff.total_seconds() // 60) + 1
+            return 1  # Zápas je LIVE, ale čas startu ještě nenastal
+        
+        if self.status == 'FIN':
+            return "Konec"
+            
+        return 0 # Pro neproběhlé zápasy
+    
 class Goal(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='goals')
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
@@ -61,7 +88,7 @@ class Penalty(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='penalties')
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     minute = models.PositiveIntegerField(default=0)
-    duration = models.IntegerField(default=2) # např. 2, 5, 10 minut
+    duration = models.IntegerField(default=2)
 
     class Meta:
         ordering = ['minute']
